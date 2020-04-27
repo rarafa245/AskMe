@@ -10,8 +10,8 @@ class App extends React.Component{
     render(){
         return(
             <Router history={browserHistory}>
-                <Route path={'/'} component={Login}/>
-                <Route path={'/home'} component={Home}/>
+                <Route exact path={'/'} component={Login}/>
+                <Route exact path={'/home'} component={Home}/>
             </Router>
         )
     }

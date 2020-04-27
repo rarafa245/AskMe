@@ -23,14 +23,18 @@ class LogginForm extends React.Component{
         event.preventDefault()
         const logginData = new FormData(event.target)
 
-        fetch('http://192.168.0.23:5000/', {
+        fetch('http://192.168.0.23:5000/login', {
             method: 'POST',
             body: logginData
         })
         .then(res => res.json())
         .then(res => {
+            console.log(res)
             if (res.status){
-                return browserHistory.push('/home')
+                return browserHistory.push({
+                    pathname: '/home', 
+                    state: {token: res.token}
+                })
             }else{
                 console.log('Nao Está logado')
             }
