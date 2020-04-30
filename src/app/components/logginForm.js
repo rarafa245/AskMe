@@ -1,5 +1,5 @@
 import React from 'react'
-import {browserHistory} from 'react-router'
+import {browserHistory, Link} from 'react-router'
 
 class LogginForm extends React.Component{
     constructor(){
@@ -7,6 +7,7 @@ class LogginForm extends React.Component{
         this.state = {
             email: '',
             pass: '',
+            message: ''
         }
 
         this.handleChange = this.handleChange.bind(this)
@@ -29,14 +30,16 @@ class LogginForm extends React.Component{
         })
         .then(res => res.json())
         .then(res => {
-            console.log(res)
             if (res.status){
                 return browserHistory.push({
                     pathname: '/home', 
                     state: {token: res.token}
                 })
             }else{
-                console.log('Nao Está logado')
+                this.setState({
+                    message: <Message type={'alert alert-danger text-center'} 
+                                message='Email ou Senha Invalidos !' />
+                })
             }
         })
     }
@@ -49,6 +52,8 @@ class LogginForm extends React.Component{
                         <form onSubmit={this.handleSubmit} className="mt-4">
                             <fieldset className="form-group">
                                 <legend className="border-bottom mb-4">Log In</legend>
+
+                                {this.state.message}
 
                                 <div className="form-group">
                                     <label htmlFor="Email">Email address</label>
@@ -98,7 +103,7 @@ function Info(){
                 </p>
                 <ul className="list-group">
                     <li className="list-group-item text-center text-lg-left">
-                        <a href="#">Create a New Account</a>
+                        <Link href="/register">Create a New Account</Link>
                     </li>
                     <li className="list-group-item text-center text-lg-left">
                         <a href="#">Forgot Account?</a>
@@ -107,6 +112,16 @@ function Info(){
             </div>
         </div>
     )
+}
+
+function Message(props) {
+    
+    return(
+        <div className={props.type} role="alert">
+            {props.message}
+        </div>
+    )
+    
 }
 
 export default LogginForm
