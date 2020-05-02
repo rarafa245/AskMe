@@ -1,5 +1,6 @@
 import React from 'react'
 import NavBar from './../components/navbar'
+import {browserHistory} from 'react-router'
 
 class Home extends React.Component{
     constructor(){
@@ -7,17 +8,17 @@ class Home extends React.Component{
         this.state = {
             isLoading: true,
             isLogged: false,
-            token: ''
         }
         this.click = this.click.bind(this)
     }
 
     componentDidMount(){
         try {
-            this.setState({
-                token: this.props.location.state.token,
-                isLogged: true
-            })
+            localStorage.setItem('AWT', this.props.location.state.token)
+            localStorage.setItem('AWTST', this.props.location.state.status)
+            localStorage.setItem('UID', this.props.location.state.username)
+            localStorage.setItem('LPC', '/home')
+            this.setState({ isLogged: true })
          }
          catch (e) {
            console.log(e)
@@ -25,9 +26,24 @@ class Home extends React.Component{
     }
 
     click(){
-        fetch("http://192.168.0.23:5000/protected?token=" + this.state.token)
-            .then(function(res){ return res.json(); })
-            .then(function(data){ alert( JSON.stringify( data ) ) })
+        fetch("http://192.168.0.23:5000/protected", {
+            method: 'GET',
+            headers: new Headers({
+                'Authorization': localStorage.getItem('AWT'), 
+                'UID': localStorage.getItem('UID')
+              })
+        })
+        .then((res) => res.json())
+        .then(res => {
+            if (res.status) {
+                localStorage.setItem('AWT', res.token)
+                alert(res.message)
+            }
+            else {
+                alert('Session Expired! Enter Again')
+                browserHistory.push('/')
+            }
+        })
     }
 
     render(){

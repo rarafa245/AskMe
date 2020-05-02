@@ -5,6 +5,7 @@ import {Router,
 import Login from './views/loginPage'
 import Home from './views/homePage'
 import Register from './views/register'
+import LogOut from './views/logout'
 
 class App extends React.Component{
 
@@ -12,8 +13,10 @@ class App extends React.Component{
         return(
             <Router history={browserHistory}>
                 <Route exact path={'/'} component={Login}/>
-                <Route exact path={'/home'} component={Home}/>
                 <Route exact path={'/register'} component={Register}/>
+                <Route exact path={'/home'} component={Home}/>
+                <Route exact path={'/logout'} component={LogOut}/>
+
             </Router>
         )
     }

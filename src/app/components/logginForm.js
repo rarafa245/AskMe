@@ -32,8 +32,13 @@ class LogginForm extends React.Component{
         .then(res => {
             if (res.status){
                 return browserHistory.push({
-                    pathname: '/home', 
-                    state: {token: res.token}
+                    pathname: (localStorage.getItem('AWTST') == 'true' ?
+                                localStorage.getItem('LPC') : '/home'),
+                    state: {
+                        token: res.token,
+                        status: res.status,
+                        username: res.username
+                    }
                 })
             }else{
                 this.setState({

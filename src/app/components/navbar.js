@@ -13,7 +13,7 @@ class NavBar extends React.Component{
             home: {
                 mode: true,
                 links: ['Account', 'Logout'],
-                route: ['#', '/']
+                route: ['#', '/logout'],
             },
             login: {
                 mode: false,
@@ -47,7 +47,7 @@ class NavBar extends React.Component{
 
     render(){
         
-        const iconLink = (this.props.home)? '/home' : '/'
+        const iconLink = (this.props.home) ? '/home' : '/'
 
         const tagLinks = this.navBarLinks()
 

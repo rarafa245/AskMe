@@ -55,7 +55,8 @@ class RegisterForm extends React.Component{
                     message: <Message type={'alert alert-info text-center'} 
                                 message={res.message} />
                 })
-            }else{
+            }
+            else {
                 this.setState({
                     message: <Message type={'alert alert-danger text-center'} 
                                 message={res.message} />
