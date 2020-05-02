@@ -9,7 +9,8 @@ class RegisterForm extends React.Component{
             email: '',
             pass: '',
             passconf: '',
-            message: ''
+            message: '',
+            disabledButton: false
         }
 
         this.handleChange = this.handleChange.bind(this)
@@ -26,7 +27,8 @@ class RegisterForm extends React.Component{
         
         this.setState({
             message: <Message type={'alert alert-dark text-center'} 
-                                message={'Wait a moment...'} />
+                                message={'Wait a moment...'} />,
+            disabledButton: true
         })
 
         event.preventDefault()
@@ -53,13 +55,19 @@ class RegisterForm extends React.Component{
             if (res.status) {
                 this.setState({
                     message: <Message type={'alert alert-info text-center'} 
-                                message={res.message} />
+                                message={res.message} />,
+                    username: '',
+                    email: '',
+                    pass: '',
+                    passconf: '',
+                    disabledButton: false
                 })
             }
             else {
                 this.setState({
                     message: <Message type={'alert alert-danger text-center'} 
-                                message={res.message} />
+                                message={res.message} />,
+                    disabledButton: false
                 })
             }
         })
@@ -119,7 +127,8 @@ class RegisterForm extends React.Component{
                                             aria-describedby="emailHelp" />
                                 </div>
 
-                                <button type="submit" 
+                                <button type="submit"
+                                        disabled={this.state.disabledButton}
                                     className="btn bg-steel text-white">
                                     Register
                                 </button>
