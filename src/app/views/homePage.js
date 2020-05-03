@@ -14,10 +14,8 @@ class Home extends React.Component{
 
     componentDidMount(){
         try {
-            localStorage.setItem('AWT', this.props.location.state.token)
-            localStorage.setItem('AWTST', this.props.location.state.status)
-            localStorage.setItem('UID', this.props.location.state.username)
             localStorage.setItem('LPC', '/home')
+            localStorage.setItem('AWTST', 'true')
             this.setState({ isLogged: true })
          }
          catch (e) {

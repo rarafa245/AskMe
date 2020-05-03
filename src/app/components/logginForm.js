@@ -15,12 +15,21 @@ class LogginForm extends React.Component{
 
 
     handleChange = (event) => {
+        // Change Input Callback - Change the value of the form inputs
+
         this.setState({
             [event.target.name]: event.target.value
         })
     }
+    
 
     handleSubmit = (event) => {
+        /* Submit Callback - Send values to Server
+            * Check if there´s a last page to return (Token expiration)
+            * Save infos in localStorage
+            * Redirect Client 
+        */
+
         event.preventDefault()
         const logginData = new FormData(event.target)
 
@@ -31,14 +40,13 @@ class LogginForm extends React.Component{
         .then(res => res.json())
         .then(res => {
             if (res.status){
+
+                localStorage.setItem('AWT', res.token)
+                localStorage.setItem('UID', res.username)
+
                 return browserHistory.push({
                     pathname: (localStorage.getItem('AWTST') == 'true' ?
-                                localStorage.getItem('LPC') : '/home'),
-                    state: {
-                        token: res.token,
-                        status: res.status,
-                        username: res.username
-                    }
+                                localStorage.getItem('LPC') : '/home')
                 })
             }else{
                 this.setState({
@@ -49,11 +57,13 @@ class LogginForm extends React.Component{
         })
     }
 
+
     render(){
         return(
             <div className="container-fluid">
                 <div className="row justify-content-lg-around">
                     <div className="content-section col-lg-6">
+
                         <form onSubmit={this.handleSubmit} className="mt-4">
                             <fieldset className="form-group">
                                 <legend className="border-bottom mb-4">Log In</legend>
@@ -84,8 +94,10 @@ class LogginForm extends React.Component{
                                     className="btn bg-steel text-white">
                                     Log In
                                 </button>
+
                             </fieldset>
                         </form>
+                        
                     </div>
                     <div className="mt-lg-5 col-lg-4">
                         <Info />
@@ -120,13 +132,16 @@ function Info(){
 }
 
 function Message(props) {
-    
+    /* Success or Falue alert
+        :parram - type: Type of the message
+                message: Info message
+    */
+
     return(
         <div className={props.type} role="alert">
             {props.message}
         </div>
     )
-    
 }
 
 export default LogginForm

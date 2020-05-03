@@ -1,4 +1,5 @@
 import React from 'react'
+import 'bootstrap/dist/css/bootstrap.min.css'
 import {Router, 
         Route, 
         browserHistory} from 'react-router'
@@ -8,6 +9,7 @@ import Register from './views/register'
 import LogOut from './views/logout'
 
 class App extends React.Component{
+    // Configure app properties
 
     render(){
         return(
@@ -16,7 +18,6 @@ class App extends React.Component{
                 <Route exact path={'/register'} component={Register}/>
                 <Route exact path={'/home'} component={Home}/>
                 <Route exact path={'/logout'} component={LogOut}/>
-
             </Router>
         )
     }
@@ -35,7 +36,4 @@ const protectedRoute = ({component: Component, ...rest}) => {
 }
 
 
-export {
-    App, 
-    protectedRoute
-}
+export default App

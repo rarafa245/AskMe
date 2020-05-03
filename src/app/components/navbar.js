@@ -1,4 +1,8 @@
-import React from 'react'
+import React, { useState } from 'react'
+import {
+    Collapse,
+    NavbarToggler,
+  } from 'reactstrap';
 import { Link } from 'react-router'
 
 class NavBar extends React.Component{
@@ -17,13 +21,17 @@ class NavBar extends React.Component{
             },
             login: {
                 mode: false,
-                links: ['About', 'Contact Me!'],
-                route: ['#', '#']
+                links: ['Create a New Account', 'About', 'Contact Me!'],
+                route: ['/register', '#', '#']
             }
         }
     }
 
     navBarLinks(){
+        /* Definindo 2 tipos de construções de elementos do navbar
+            dependendo do login do usuario
+        */
+
         if (this.props.home === this.state.home.mode){
             //If the mode is Home, return the links fro home
 
@@ -48,12 +56,15 @@ class NavBar extends React.Component{
     render(){
         
         const iconLink = (this.props.home) ? '/home' : '/'
+        const expand = (this.props.home) ? 
+                    "navbar navbar-expand navbar-light bg-steel" 
+                    : "navbar navbar-expand-sm navbar-light bg-steel"
 
         const tagLinks = this.navBarLinks()
 
 
         return(
-            <DefaultNavBar iconLink={iconLink}>
+            <DefaultNavBar iconLink={iconLink} expand={expand}>
                 {tagLinks}
             </DefaultNavBar>
         )
@@ -66,20 +77,23 @@ function DefaultNavBar(props){
         :parram - Children Component: Place reserved for adding links <li> 
         :return - Navegation Bar template
     */
+   
+    const [isOpen, setIsOpen] = useState(false);
+
+    const toggle = () => setIsOpen(!isOpen);
+
 
 
     return(
         <div>
-            <nav className="navbar navbar-expand navbar-light bg-steel">
+            <nav className={props.expand}>
                 <Link className="navbar-brand text-white" href={props.iconLink}>Ask Me!</Link>
-                <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-                    <span className="navbar-toggler-icon"></span>
-                </button>
-                <div className="collapse navbar-collapse" id="navbarSupportedContent">
+                <NavbarToggler onClick={toggle} />
+                <Collapse isOpen={isOpen} navbar>   
                     <ul className="navbar-nav ml-auto">
                         {props.children}
                     </ul>
-                </div>
+                </Collapse>
             </nav>
         </div>
         

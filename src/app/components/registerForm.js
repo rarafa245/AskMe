@@ -18,34 +18,49 @@ class RegisterForm extends React.Component{
 
 
     handleChange = (event) => {
+        // Change Input Callback - Change the value of the form inputs
+
         this.setState({
             [event.target.name]: event.target.value
         })
     }
 
     handleSubmit = (event) => {
+        /* Submit Callback - Send values to Server
+            * Informs the customer about the requisition 
+            * Checks whether the data meets the requirements
+            * Send the datas
+            * Return the information of Success or Failuer of process
+        */
         
+        event.preventDefault()
+        
+        // Changes status while not receiving storage confirmation
+        // Information processing alert
         this.setState({
             message: <Message type={'alert alert-dark text-center'} 
                                 message={'Wait a moment...'} />,
             disabledButton: true
         })
 
-        event.preventDefault()
-
+        
+        // Changing the state if password not confirmed
+        // Information processing alert
+        // Return and stop the callback 
         if ( !(event.target.pass.value == event.target.passconf.value) ) {
-
             this.setState({
                 message: <Message type={'alert alert-danger text-center'} 
-                            message={"Password don't match!"} />
+                            message={"Password don't match!"} />,
+                disabledButton: false
             })
 
             return
         }
 
 
+        // Get the  information from form and post it
+        // Send an confrm or failure message
         const logginData = new FormData(event.target)
-
         fetch('http://192.168.0.23:5000/register', {
             method: 'POST',
             body: logginData
@@ -168,6 +183,10 @@ function Info(){
 }
 
 function Message(props) {
+    /* Success or Falue alert
+        :parram - type: Type of the message
+                message: Info message
+    */
     
     return(
         <div className={props.type} role="alert">
