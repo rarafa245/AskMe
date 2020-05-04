@@ -1,5 +1,4 @@
 import React from 'react'
-import { browserHistory } from 'react-router'
 
 class LogOut extends React.Component {
     /*  Class for client Log Out
@@ -9,7 +8,8 @@ class LogOut extends React.Component {
 
     componentDidMount(){
         localStorage.setItem('AWTST', 'false')
-        browserHistory.push('/')
+        this.props.history.push('/')
+        console.log(this.props.location.pathname)
     }
 
     render(){

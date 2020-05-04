@@ -1,6 +1,6 @@
 import React from 'react'
 import NavBar from './../components/navbar'
-import {browserHistory} from 'react-router'
+import {useHistory} from 'react-router-dom'
 
 class Home extends React.Component{
     constructor(){
@@ -13,14 +13,10 @@ class Home extends React.Component{
     }
 
     componentDidMount(){
-        try {
-            localStorage.setItem('LPC', '/home')
-            localStorage.setItem('AWTST', 'true')
-            this.setState({ isLogged: true })
-         }
-         catch (e) {
-           console.log(e)
-        } 
+        
+        localStorage.setItem('LPC', this.props.location.pathname)
+        localStorage.setItem('AWTST', 'true')
+        this.setState({ isLogged: true }) 
     }
 
     click(){
@@ -38,8 +34,9 @@ class Home extends React.Component{
                 alert(res.message)
             }
             else {
+                console.log(res.message)
                 alert('Session Expired! Enter Again')
-                browserHistory.push('/')
+                useHistory.push('/')
             }
         })
     }

@@ -3,7 +3,7 @@ import {
     Collapse,
     NavbarToggler,
   } from 'reactstrap';
-import { Link } from 'react-router'
+import { Link } from 'react-router-dom'
 
 class NavBar extends React.Component{
     /* Creating a General Navegation Bar Component.
@@ -87,7 +87,7 @@ function DefaultNavBar(props){
     return(
         <div>
             <nav className={props.expand}>
-                <Link className="navbar-brand text-white" href={props.iconLink}>Ask Me!</Link>
+                <Link className="navbar-brand text-white" to={props.iconLink}>Ask Me!</Link>
                 <NavbarToggler onClick={toggle} />
                 <Collapse isOpen={isOpen} navbar>   
                     <ul className="navbar-nav ml-auto">
@@ -109,7 +109,7 @@ function NavBarContent(props){
 
     return(
         <li className="nav-item active">
-            <Link className="nav-link text-white" href={props.route}>{props.content}<span className="sr-only">(current)</span></Link>
+            <Link className="nav-link text-white" to={props.route}>{props.content}<span className="sr-only">(current)</span></Link>
         </li>
     )
 }

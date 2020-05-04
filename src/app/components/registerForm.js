@@ -1,5 +1,5 @@
 import React from 'react'
-import {browserHistory, Link} from 'react-router'
+import {useHistory, Link} from 'react-router-dom'
 
 class RegisterForm extends React.Component{
     constructor(){
@@ -171,7 +171,7 @@ function Info(){
                 </p>
                 <ul className="list-group">
                     <li className="list-group-item text-center text-lg-left">
-                        <Link href="/">Return</Link>
+                        <Link to="/">Return</Link>
                     </li>
                     <li className="list-group-item text-center text-lg-left">
                         <a href="#">Forgot Account?</a>

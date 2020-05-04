@@ -1,39 +1,41 @@
 import React from 'react'
 import 'bootstrap/dist/css/bootstrap.min.css'
-import {Router, 
+import {
+        BrowserRouter as Router, 
         Route, 
-        browserHistory} from 'react-router'
+        Switch} from 'react-router-dom'
 import Login from './views/loginPage'
 import Home from './views/homePage'
 import Register from './views/register'
 import LogOut from './views/logout'
+
 
 class App extends React.Component{
     // Configure app properties
 
     render(){
         return(
-            <Router history={browserHistory}>
-                <Route exact path={'/'} component={Login}/>
-                <Route exact path={'/register'} component={Register}/>
-                <Route exact path={'/home'} component={Home}/>
-                <Route exact path={'/logout'} component={LogOut}/>
+            <Router>
+                <Switch>
+                    <Route exact path={'/'} component={Login}/>
+                    <Route exact path={'/register'} component={Register}/>
+                    <PrivateRoute exact path={'/home'} component={Home}/>
+                    <PrivateRoute exact path={'/logout'} component={LogOut}/>
+                </Switch>
             </Router>
         )
     }
 }
 
-const protectedRoute = ({component: Component, ...rest}) => {
-    return(
-        <Route {...rest} 
-                render={
-                        (props) => {
-                            if(props.location.state.token) return <Component {...props} />
-                            else return <h1>NAAAAAO</h1>
-                        }}
-        />
-    )
-}
+
+const PrivateRoute = ({component: Component, ...rest}) => (
+    <Route {...rest} 
+        render = { props => (
+            (localStorage.getItem('AWT')) ? (<Component {...props} />) : (props.history.push('/'))
+        )}
+    />
+)
+
 
 
 export default App

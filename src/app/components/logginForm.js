@@ -1,5 +1,6 @@
 import React from 'react'
-import {browserHistory, Link} from 'react-router'
+import {Link} from 'react-router-dom'
+
 
 class LogginForm extends React.Component{
     constructor(){
@@ -43,8 +44,7 @@ class LogginForm extends React.Component{
 
                 localStorage.setItem('AWT', res.token)
                 localStorage.setItem('UID', res.username)
-
-                return browserHistory.push({
+                this.props.history.push({
                     pathname: (localStorage.getItem('AWTST') == 'true' ?
                                 localStorage.getItem('LPC') : '/home')
                 })
@@ -120,7 +120,7 @@ function Info(){
                 </p>
                 <ul className="list-group">
                     <li className="list-group-item text-center text-lg-left">
-                        <Link href="/register">Create a New Account</Link>
+                        <Link to="/register">Create a New Account</Link>
                     </li>
                     <li className="list-group-item text-center text-lg-left">
                         <a href="#">Forgot Account?</a>

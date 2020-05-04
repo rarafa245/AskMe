@@ -10,6 +10,7 @@ class Login extends React.Component{
     */
 
     componentDidMount(){
+        
         var awtst = localStorage.getItem('AWTST')
         if (awtst === 'true') {
             var lastPage = localStorage.getItem('LPC')
@@ -25,14 +26,13 @@ class Login extends React.Component{
         return(
             <div>
                 <header>
-                    <NavBar home={false}/>
+                    <NavBar  home={false}/>
                 </header>
-                <LogginForm />
+                <LogginForm {...this.props}/>
             </div>
         )
     }
 }
-
 
 
 export default Login
