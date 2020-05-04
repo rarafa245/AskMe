@@ -62,7 +62,7 @@ class LogginForm extends React.Component{
         return(
             <div className="container-fluid">
                 <div className="row justify-content-lg-around">
-                    <div className="content-section col-lg-6">
+                    <div className="col-lg-6">
 
                         <form onSubmit={this.handleSubmit} className="mt-4">
                             <fieldset className="form-group">

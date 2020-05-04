@@ -16,8 +16,8 @@ class NavBar extends React.Component{
         this.state = {
             home: {
                 mode: true,
-                links: ['Account', 'Logout'],
-                route: ['#', '/logout'],
+                links: ['Messages', 'Account', 'Logout'],
+                route: ['#', '#', '/logout'],
             },
             login: {
                 mode: false,
