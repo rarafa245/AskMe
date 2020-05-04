@@ -1,6 +1,4 @@
 import React from 'react'
-import {Link} from 'react-router-dom'
-
 
 class LogginForm extends React.Component{
     constructor(){
@@ -60,76 +58,45 @@ class LogginForm extends React.Component{
 
     render(){
         return(
-            <div className="container-fluid">
-                <div className="row justify-content-lg-around">
-                    <div className="col-lg-6">
+            <div className="col-lg-6">
+                <form onSubmit={this.handleSubmit} className="mt-4">
+                    <fieldset className="form-group">
+                        <legend className="border-bottom mb-4">Log In</legend>
 
-                        <form onSubmit={this.handleSubmit} className="mt-4">
-                            <fieldset className="form-group">
-                                <legend className="border-bottom mb-4">Log In</legend>
+                        {this.state.message}
 
-                                {this.state.message}
+                        <div className="form-group">
+                            <label htmlFor="Email">Email address</label>
+                            <input id="Email"
+                                    name="email"
+                                    value={this.state.email}
+                                    onChange={this.handleChange}
+                                    type="email" 
+                                    className="form-control mb-2" 
+                                    aria-describedby="emailHelp" />
+                            
+                            <label htmlFor="Pass">Password</label>
+                            <input id="Pass"
+                                    name="pass"
+                                    onChange={this.handleChange}
+                                    value={this.state.pass} 
+                                    type="password" 
+                                    className="form-control" 
+                                    aria-describedby="emailHelp" />
+                        </div>
 
-                                <div className="form-group">
-                                    <label htmlFor="Email">Email address</label>
-                                    <input id="Email"
-                                            name="email"
-                                            value={this.state.email}
-                                            onChange={this.handleChange}
-                                            type="email" 
-                                            className="form-control mb-2" 
-                                            aria-describedby="emailHelp" />
-                                    
-                                    <label htmlFor="Pass">Password</label>
-                                    <input id="Pass"
-                                            name="pass"
-                                            onChange={this.handleChange}
-                                            value={this.state.pass} 
-                                            type="password" 
-                                            className="form-control" 
-                                            aria-describedby="emailHelp" />
-                                </div>
+                        <button type="submit" 
+                            className="btn bg-steel text-white">
+                            Log In
+                        </button>
 
-                                <button type="submit" 
-                                    className="btn bg-steel text-white">
-                                    Log In
-                                </button>
-
-                            </fieldset>
-                        </form>
-                        
-                    </div>
-                    <div className="mt-lg-5 col-lg-4">
-                        <Info />
-                    </div>
-                </div>
+                    </fieldset>
+                </form>
             </div>
         )
     }
 }
 
-
-function Info(){
-    return(
-        <div className="card">
-            <div className="card-body">
-                <h5 className="card-title text-center">Your answers are here!</h5>
-                <h6 className="card-subtitle mb-2 text-muted text-center">sign in for free</h6>
-                <p className="card-text text-center">
-                    Store your questions and answer them. If you need to review such an answer, you can check it out here!
-                </p>
-                <ul className="list-group">
-                    <li className="list-group-item text-center text-lg-left">
-                        <Link to="/register">Create a New Account</Link>
-                    </li>
-                    <li className="list-group-item text-center text-lg-left">
-                        <a href="#">Forgot Account?</a>
-                    </li>
-                </ul>
-            </div>
-        </div>
-    )
-}
 
 function Message(props) {
     /* Success or Falue alert

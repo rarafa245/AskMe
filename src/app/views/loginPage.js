@@ -1,6 +1,8 @@
 import React from 'react'
 import NavBar from './../components/navbar'
 import LogginForm from './../components/logginForm'
+import InfoCard from './../components/infoCard'
+
 
 class Login extends React.Component{
     /* Login Page. First visitor´s page
@@ -28,7 +30,15 @@ class Login extends React.Component{
                 <header>
                     <NavBar  home={false}/>
                 </header>
-                <LogginForm {...this.props}/>
+                <div className="container-fluid">
+                    <section className="row justify-content-lg-around">
+                        <LogginForm {...this.props}/>
+                        <InfoCard  mode={'login'}
+                                    title={'Your answers are here!'}
+                                    subtitle={'sign in for free'}
+                                    message={'Store your questions and answer them. If you need to review such an answer, you can check it out here!'}/>
+                    </section>
+                </div>
             </div>
         )
     }
