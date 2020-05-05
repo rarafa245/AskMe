@@ -2,6 +2,7 @@ import React from 'react'
 import NavBar from './../components/navbar'
 import LeftSideBar from './../components/leftSideBar'
 import HomeCard from './../components/homeCard'
+import InfoCard from './../components/infoCard'
 import {Link} from 'react-router-dom'
 
 class Home extends React.Component{
@@ -21,7 +22,8 @@ class Home extends React.Component{
                     <div className = "row">
                         <LeftSideBar />
                         <HomeCard />
-                        <Info />
+                        <InfoCard mode={'home'}
+                                    title={'Find New Contacts!'}/>
                     </div>
                 </div>
             </div>

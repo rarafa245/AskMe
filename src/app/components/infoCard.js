@@ -10,17 +10,17 @@ class InfoCard extends React.Component{
             home: {
                 mode: 'home',
                 size: 'mt-2 col-lg-4',
-                links: ['Messages', 'Account', 'Logout'],
-                route: ['#', '#', '/logout'],
+                links: ['Find Contacts', 'Check Out Messages'],
+                route: ['#', '#'],
             },
             login: {
-                mode: 'login',
+                mode: 'register',
                 size: 'mt-lg-5 col-lg-4',
-                links: ['Create a New Account', 'Forgot Account?'],
-                route: ['/register', '#']
+                links: ['Forgot Account?', 'Return'],
+                route: ['#', '/']
             },
             register: {
-                mode: 'register',
+                mode: 'login',
                 size: 'mt-lg-5 col-lg-4',
                 links: ['Create a New Account', 'About', 'Contact Me!'],
                 route: ['/register', '#', '#']

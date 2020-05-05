@@ -39,7 +39,6 @@ class LogginForm extends React.Component{
         .then(res => res.json())
         .then(res => {
             if (res.status){
-
                 localStorage.setItem('AWT', res.token)
                 localStorage.setItem('UID', res.username)
                 this.props.history.push({
@@ -84,12 +83,11 @@ class LogginForm extends React.Component{
                                     className="form-control" 
                                     aria-describedby="emailHelp" />
                         </div>
-
+                        
                         <button type="submit" 
-                            className="btn bg-steel text-white">
-                            Log In
-                        </button>
-
+                                    className="text-white bg-steel">
+                                        Log In
+                                </button>
                     </fieldset>
                 </form>
             </div>
