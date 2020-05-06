@@ -3,7 +3,7 @@ import {Link} from 'react-router-dom'
 
 const ManageContactsSide =  (props) =>{
     return(
-        <div className="d-none d-sm-block mt-2 col-lg-4">
+        <div className="d-none d-lg-block mt-2 col-lg-4">
             <ul className="list-group text-center">
             <li className="list-group-item">
                     <h6>Manage Your Contacts</h6>
