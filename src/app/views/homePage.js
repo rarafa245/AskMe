@@ -1,8 +1,8 @@
 import React from 'react'
-import NavBar from './../components/navbar'
-import LeftSideBar from './../components/leftSideBar'
-import HomeCard from './../components/homeCard'
-import {Link} from 'react-router-dom'
+import LeftSideBar from '../components/homeComponents/leftSideBar'
+import UserCard from '../components/homeComponents/userCard'
+import HomeNav from '../components/homeComponents/homeNav'
+import ManageContactsSide from '../components/homeComponents/manageContactsSide'
 
 class Home extends React.Component{
     
@@ -15,36 +15,18 @@ class Home extends React.Component{
         return(
             <div>
                 <header>
-                    <NavBar  home={true}/>
+                    <HomeNav />
                 </header>
                 <div className="container-fluid">
                     <div className = "row">
                         <LeftSideBar />
-                        <HomeCard />
-                        <Info />
+                        <UserCard />
+                        <ManageContactsSide />
                     </div>
                 </div>
             </div>
         )
     }
-}
-
-function Info(){
-    return(
-        <div className="mt-2 col-lg-4">
-            <ul className="list-group text-center">
-            <li className="list-group-item">
-                    <h6>Find New Contacts</h6>
-                </li>
-                <li className="list-group-item">
-                    <Link to="/">Find Contacts</Link>
-                </li>
-                <li className="list-group-item">
-                    <a href="#">Check Out Messages</a>
-                </li>
-            </ul>
-        </div>
-    )
 }
 
 export default Home

@@ -1,6 +1,7 @@
 import React from 'react'
-import NavBar from './../components/navbar'
-import LogginForm from './../components/logginForm'
+import NavBar from '../components/logginComponents/navbar'
+import LogginForm from '../components/logginComponents/logginForm'
+import IntroduceBar from '../components/logginComponents/introduceBar'
 
 class Login extends React.Component{
     /* Login Page. First visitor´s page
@@ -21,14 +22,22 @@ class Login extends React.Component{
         else  localStorage.clear()
     }
 
-
+    
     render(){
         return(
             <div>
                 <header>
-                    <NavBar  home={false}/>
+                    <NavBar/>
                 </header>
-                <LogginForm {...this.props}/>
+                <div className="container-fluid">
+                    <div className="row justify-content-lg-around">
+                        <LogginForm {...this.props}/>
+                        <IntroduceBar mode = 'home'
+                                    title={'Your answers are here!'}
+                                    subtitle={'sign in for free'}
+                                    message={'Store your questions and answer them. If you need to review such an answer, you can check it out here!'}/>
+                    </div>
+                </div>
             </div>
         )
     }

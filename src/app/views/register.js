@@ -1,6 +1,8 @@
 import React from 'react'
-import NavBar from './../components/navbar'
-import RegisterForm from './../components/registerForm'
+import NavBar from '../components/logginComponents/navbar'
+import RegisterForm from '../components/logginComponents/registerForm'
+import IntroduceBar from '../components/logginComponents/introduceBar'
+
 
 class Register extends React.Component{
     // Register new client Page
@@ -9,9 +11,17 @@ class Register extends React.Component{
         return(
             <div>
                 <header>
-                    <NavBar home={false}/>
+                    <NavBar />
                 </header>
-                <RegisterForm />
+                <div className="container-fluid">
+                    <div className="row justify-content-lg-around">
+                        <RegisterForm />
+                        <IntroduceBar  mode='register'
+                                    title='Come on, Join This Community!'
+                                    subtitle='Free for all'
+                                    message='You can ask your questions to get answers from other users and store them for future reference'/>
+                    </div>
+                </div>
             </div>
         )
     }

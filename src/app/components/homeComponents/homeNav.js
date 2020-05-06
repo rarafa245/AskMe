@@ -5,7 +5,7 @@ import {
   } from 'reactstrap';
 import { Link } from 'react-router-dom'
 
-class NavBar extends React.Component{
+class HomeNav extends React.Component{
     /* Creating a General Navegation Bar Component.
         :parram - home: Boolean indicating if the Navegation Bar 
                         is for Home Page or Logging Page
@@ -15,56 +15,28 @@ class NavBar extends React.Component{
         super()
         this.state = {
             home: {
-                mode: true,
-                links: ['Messages', 'Account', 'Logout'],
-                route: ['#', '#', '/logout'],
-            },
-            login: {
-                mode: false,
-                links: ['Create a New Account', 'About', 'Contact Me!'],
-                route: ['/register', '#', '#']
+                links: ['Questions', 'Contacts', 'Messages' , 'Logout'],
+                route: ['#', '#', '#', '/logout']
             }
         }
     }
 
     navBarLinks(){
-        /* Definindo 2 tipos de construções de elementos do navbar
-            dependendo do login do usuario
-        */
 
-        if (this.props.home === this.state.home.mode){
-            //If the mode is Home, return the links fro home
-
-            const tagLinks = this.state.home.links.map(
-                (element, index) => <NavBarContent key={index} 
-                                                    content={element} 
-                                                    route={this.state.home.route[index]}/>
-                )
-            return tagLinks
-        }else{
-            //If the mode isn´t Home, return the links fro Logging
-
-            const tagLinks = this.state.login.links.map(
-                (element, index) => <NavBarContent key={index} 
-                                                    content={element} 
-                                                    route={this.state.login.route[index]}/>
-                )
-            return tagLinks
-        }
+        const tagLinks = this.state.home.links.map(
+            (element, index) => <NavBarContent key={index} 
+                                                content={element} 
+                                                route={this.state.home.route[index]}/>
+            )
+        return tagLinks
     }
 
     render(){
-        
-        const iconLink = (this.props.home) ? '/home' : '/'
-        const expand = (this.props.home) ? 
-                    "navbar navbar-expand navbar-light bg-steel" 
-                    : "navbar navbar-expand-sm navbar-light bg-steel"
 
         const tagLinks = this.navBarLinks()
 
-
         return(
-            <DefaultNavBar iconLink={iconLink} expand={expand}>
+            <DefaultNavBar iconLink={'/home'}>
                 {tagLinks}
             </DefaultNavBar>
         )
@@ -86,7 +58,7 @@ function DefaultNavBar(props){
 
     return(
         <div>
-            <nav className={props.expand}>
+            <nav className="navbar navbar-expand-sm navbar-light bg-steel">
                 <Link className="navbar-brand text-white" to={props.iconLink}>Ask Me!</Link>
                 <NavbarToggler onClick={toggle} />
                 <Collapse isOpen={isOpen} navbar>   
@@ -115,4 +87,4 @@ function NavBarContent(props){
 }
 
 
-export default NavBar
+export default HomeNav
