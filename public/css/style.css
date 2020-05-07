@@ -79,5 +79,12 @@ a.article-title:hover {
 
 ul#leftSideBar {
   display: inline-block;
-  text-align: center;
+  text-align: 
+  center;
+}
+
+div#homeCard {
+
+  background-color: #5f788a;
+
 }

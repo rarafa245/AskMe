@@ -32,8 +32,6 @@ class Home extends React.Component{
             let total_question = []
             receivedData = JSON.parse(res.message)
 
-            console.log(res)
-
             for (index in receivedData){
 
 
@@ -46,8 +44,6 @@ class Home extends React.Component{
             }
 
             this.setState({ questions: total_question })
-
-        
         })
     }
 
@@ -57,14 +53,21 @@ class Home extends React.Component{
                 <header>
                     <HomeNav />
                 </header>
-                <div className="container-fluid">
+                <section className="container-fluid">
                     <div className="row">
                         <LeftSideBar />
-                        <UserCard />
+                        <UserCard mode="home"/>
                         <ManageContactsSide />
                     </div>
-                    {this.state.questions}
-                </div>
+                    <div className="card p-0 ml-auto mr-auto col-lg-10">
+                        <div id="homeCard" className="card-header">
+                            <h4 className="text-white">Your Recent Questions!</h4>
+                        </div>
+                        <div className="card-body">
+                            {this.state.questions}
+                        </div>
+                    </div>
+                </section>
             </div>
         )
     }
