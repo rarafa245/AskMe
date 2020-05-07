@@ -3,6 +3,7 @@ import NavBar from '../components/logginComponents/navbar'
 import LogginForm from '../components/logginComponents/logginForm'
 import IntroduceBar from '../components/logginComponents/introduceBar'
 
+
 class Login extends React.Component{
     /* Login Page. First visitor´s page
         When rendered, it checks whether the return to the page was due to Token expiration. 
@@ -22,7 +23,6 @@ class Login extends React.Component{
         else  localStorage.clear()
     }
 
-    
     render(){
         return(
             <div>
