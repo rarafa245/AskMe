@@ -89,7 +89,7 @@ class LogginForm extends React.Component{
                         </div>
 
                         <button type="submit" 
-                            className="bg-steel text-white">
+                            className="btn bg-steel text-white">
                             Log In
                         </button>
                     </fieldset>

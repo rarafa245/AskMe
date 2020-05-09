@@ -1,25 +1,13 @@
-body {
-  background: #fafafa;
-  color: #333333;
-  margin-top: 5rem;
+body{
+  background: #F8F8F8;
 }
 
 h1, h2, h3, h4, h5, h6 {
   color: #444444;
 }
 
-.bg-steel {background-color: #5f788a;}
-
-.site-header .navbar-nav .nav-link {
-  color: #cbd5db;
-}
-
-.site-header .navbar-nav .nav-link:hover {
-  color: #ffffff;
-}
-
-.site-header .navbar-nav .nav-link.active {
-  font-weight: 500;
+.bg-steel {
+  background-color: #5f788a;
 }
 
 .content-section {
@@ -60,31 +48,7 @@ a.article-title:hover {
   text-decoration: none;
 }
 
-.article-svg {
-  width: 25px;
-  height: 25px;
-  vertical-align: middle;
-}
-
-.account-img {
-  height: 125px;
-  width: 125px;
-  margin-right: 20px;
-  margin-bottom: 16px;
-}
-
-.account-heading {
-  font-size: 2.5rem;
-}
-
 ul#leftSideBar {
   display: inline-block;
-  text-align: 
-  center;
-}
-
-div#homeCard {
-
-  background-color: #5f788a;
-
+  text-align: center;
 }

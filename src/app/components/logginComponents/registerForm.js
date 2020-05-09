@@ -141,7 +141,7 @@ class RegisterForm extends React.Component{
 
                         <button type="submit"
                                 disabled={this.state.disabledButton}
-                            className="bg-steel text-white">
+                            className="btn bg-steel text-white">
                             Register
                         </button>
                     </fieldset>

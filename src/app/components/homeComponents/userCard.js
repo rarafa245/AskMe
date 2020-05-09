@@ -22,7 +22,7 @@ class userCard extends React.Component{
         if (this.props.mode == this.state.home.mode) {
 
             this.setState({
-                componentDefinitions: 'media content-section '
+                componentDefinitions: 'media content-section'
                                         + this.state.home.width
                                         + this.state.home.margin
             })

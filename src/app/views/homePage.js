@@ -60,7 +60,7 @@ class Home extends React.Component{
                         <ManageContactsSide />
                     </div>
                     <div className="card p-0 ml-auto mr-auto col-lg-10">
-                        <div id="homeCard" className="card-header">
+                        <div id="homeCard" className="card-header bg-steel">
                             <h4 className="text-white">Your Recent Questions!</h4>
                         </div>
                         <div className="card-body">
