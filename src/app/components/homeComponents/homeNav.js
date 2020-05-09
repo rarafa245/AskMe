@@ -16,7 +16,7 @@ class HomeNav extends React.Component{
         this.state = {
             home: {
                 links: ['Questions', 'Contacts', 'Messages' , 'Logout'],
-                route: ['#', '#', '#', '/logout']
+                route: ['/questions', '#', '#', '/logout']
             }
         }
     }

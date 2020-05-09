@@ -12,7 +12,7 @@ class userCard extends React.Component{
             question: {
                 mode: 'question',
                 width: ' col-12',
-                margin: ' mt-2'
+                margin: ' mt-2 ml-auto mr-auto'
             },
             componentDefinitions: ''
         }
@@ -36,8 +36,7 @@ class userCard extends React.Component{
                                         + this.state.question.margin
             })
         }
-
-
+        
     }
 
     render(){
@@ -48,9 +47,9 @@ class userCard extends React.Component{
             <article className={this.state.componentDefinitions}>
                 <img className="rounded-circle article-img" src='#' />
                 <div className="media-body">
-                    <h3 className="article-metadata text-center text-sm-left"><a className="article-title" href="#">
+                    <h4 className="article-metadata text-center text-md-left"><a className="article-title" href="#">
                         Hi {localStorage.getItem('UID')}
-                    </a></h3>
+                    </a></h4>
                     <p className="mt-3 text-center text-sm-left">9999 New Messages</p>
                     <p className="text-center text-sm-left">9999 New Invitations</p>
                 </div>
