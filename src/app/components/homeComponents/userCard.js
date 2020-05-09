@@ -6,7 +6,7 @@ class userCard extends React.Component{
         this.state = {
             home: {
                 mode: 'home',
-                width: ' col-11 col-sm-8 col-lg-6',
+                width: ' col-11 col-sm-8 col-lg-12',
                 margin: ' mt-2 ml-auto mr-auto'
             },
             question: {
@@ -44,7 +44,7 @@ class userCard extends React.Component{
 
 
         return(
-            <article className={this.state.componentDefinitions}>
+            <article className="media content-section">
                 <img className="rounded-circle article-img" src='#' />
                 <div className="media-body">
                     <h4 className="article-metadata text-center text-md-left"><a className="article-title" href="#">

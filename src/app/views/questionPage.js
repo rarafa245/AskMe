@@ -15,7 +15,7 @@ class QuestionPage extends React.Component{
                 <section className="container-fluid">
                     <div className="row">
                         <div className="h-50 m-1 
-                                        col-md-7 col-lg-6 col-xl-5">
+                                        col-md-6 col-lg-6 col-xl-5">
                             <div className="d-none d-sm-block">
                                 <UserCard mode='question'/>
                             </div>

@@ -26,16 +26,32 @@ class Home extends React.Component{
                 <header>
                     <HomeNav />
                 </header>
+
                 <section className="container-fluid">
                     <div className="row">
-                        <LeftSideBar />
-                        <UserCard mode="home"/>
-                        <ManageContactsSide />
-                    </div>
-                    <div className="p-0 ml-auto mr-auto col-lg-10">
-                        <QuestionGroup />
+
+                        <aside className="col-3 mt-1
+                                            d-none d-sm-none d-md-block
+                                            ">
+                            <LeftSideBar />
+                        </aside>
+
+                        <section className="col-6 mt-1
+                                            col-12 col-md-9 col-lg-6
+                                            ">
+                            <UserCard mode="home"/>
+                            <QuestionGroup />
+                        </section>
+
+                        <asside className="col-3 
+                                            d-none d-sm-none d-md-none d-lg-block  
+                                            ">
+                            <ManageContactsSide />
+                        </asside>
+
                     </div>
                 </section>
+
             </div>
         )
     }
