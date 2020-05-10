@@ -9,7 +9,6 @@ class QuestionGroup extends React.Component{
         }
     }
 
-
     componentDidMount(){
 
         fetch("http://192.168.0.23:5000/userQuestions",{
