@@ -38,6 +38,25 @@ const PrivateRoute = ({component: Component, ...rest}) => (
     />
 )
 
+function loadPage(){
+
+    fetch("http://192.168.0.23:5000/refresh", {
+        method: "GET",
+        headers: new Headers({
+            'Authorization': localStorage.getItem('AWT'),
+            'UID': localStorage.getItem('UID')
+        })
+    })
+    .then(res => res.json())
+    .then(res => { 
+        if (res.status){
+        localStorage.setItem('AWT', res.token)
+        }
+    })
+}
 
 
-export default App
+export {
+    App,
+    loadPage
+}

@@ -6,13 +6,13 @@ class QuestionsForm extends React.Component{
         super()
         this.state = {
             title: '',
-            subtitle: '',
-            content: ''
+            content: '',
+            message: '',
+            disabledButton: false
         }
 
         this.handleChange = this.handleChange.bind(this)
     }
-
 
     handleChange = (event) => {
         // Change Input Callback - Change the value of the form inputs
@@ -24,16 +24,44 @@ class QuestionsForm extends React.Component{
     
 
     handleSubmit = (event) => {
-        /* Submit Callback - Send values to Server
-            * Check if there´s a last page to return (Token expiration)
-            * Save infos in localStorage
-            * Redirect Client 
-        */
 
         event.preventDefault()
-        const logginData = new FormData(event.target)
 
-        
+        this.setState({
+            message: <Message type={'alert alert-dark text-center'} 
+                                message={'Wait a moment...'} />,
+            disabledButton: true
+        })
+
+        const questionData = new FormData(event.target)
+
+        fetch('http://192.168.0.23:5000/regQuestion', {
+            method: 'POST',
+            headers: new Headers({
+                'Authorization': localStorage.getItem('AWT'),
+                'UID': localStorage.getItem('UID')
+            }),
+            body: questionData
+        })
+        .then(res => res.json())
+        .then(res => {
+            if (res.status) {
+                this.setState({
+                    message: <Message type={'alert alert-info text-center'} 
+                                message={res.message} />,
+                    title: '',
+                    content: '',
+                    disabledButton: false
+                })
+            }
+            else {
+                this.setState({
+                    message: <Message type={'alert alert-danger text-center'} 
+                                message={res.message} />,
+                    disabledButton: false
+                })
+            }
+        })
     }
 
 
@@ -41,7 +69,7 @@ class QuestionsForm extends React.Component{
         return(
             <div className="col-12">
 
-                <form onSubmit={this.handleSubmit} className="mt-1">
+                <form onSubmit={this.handleSubmit}>
                     <fieldset className="form-group">
                         <legend className="border-bottom text-center text-md-left mb-4">New Question?</legend>
 
@@ -56,14 +84,6 @@ class QuestionsForm extends React.Component{
                                     type="text" 
                                     className="form-control mb-2" />
                             
-                            <label htmlFor="Subtitle"><h6>Question Subtitle</h6></label>
-                            <input id="Subtitle"
-                                    name="subtitle"
-                                    onChange={this.handleChange}
-                                    value={this.state.subtitle} 
-                                    type="text" 
-                                    className="form-control mb-2" />
-                            
                             <label htmlFor="Content"><h6>Whats Your Question?</h6></label>
                             <textarea id="Content"
                                     name="content"
@@ -75,7 +95,8 @@ class QuestionsForm extends React.Component{
                         </div>
 
                         <button type="submit" 
-                            className="btn bg-steel text-white">
+                                disabled={this.state.disabledButton}
+                                className="btn bg-steel text-white">
                             Submit
                         </button>
                     </fieldset>

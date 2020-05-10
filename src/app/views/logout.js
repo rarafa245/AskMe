@@ -9,7 +9,6 @@ class LogOut extends React.Component {
     componentDidMount(){
         localStorage.setItem('AWTST', 'false')
         this.props.history.push('/')
-        console.log(this.props.location.pathname)
     }
 
     render(){

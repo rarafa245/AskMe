@@ -43,11 +43,11 @@ class QuestionGroup extends React.Component{
 
     render(){
         return(
-            <div className="scroll-small">
-                <div>
+            <div className="card scroll-small">
+                <div className="justify-content-around">
                     <p className="m-2 opacity-3"><strong>Your Recent Questions!</strong></p>
                 </div>
-                <div className="card-body">
+                <div>
                     {this.state.questions}
                 </div>
             </div>
@@ -59,11 +59,11 @@ class QuestionGroup extends React.Component{
 const QuestionCard = (props) =>{
 
     return(
-        <div className="d-inline-block mb-3 col-12 col-md-6">
+        <div className="mb-2 p-2">
             <div className="card">
                 <h6 className="card-header text-white bg-steel truncate">{props.title}</h6>
                 <div className="card-body cardheight">
-                    <p className="card-text truncate">{props.content}</p>
+                    <p className="card-text question-content truncate">{props.content}</p>
                 </div>
             </div>
         </div>

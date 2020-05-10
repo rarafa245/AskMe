@@ -1,10 +1,18 @@
 import React from 'react'
+import { loadPage } from '../config'
 import HomeNav from '../components/homeComponents/homeNav'
 import UserCard from '../components/homeComponents/userCard'
 import QuestionsForm from '../components/questionsComponents/questionsForm'
 import QuestionGroup from '../components/homeComponents/questionGroup'
 
+
 class QuestionPage extends React.Component{
+
+    componentDidMount(){
+        localStorage.setItem('LPC', this.props.location.pathname)
+        localStorage.setItem('AWTST', 'true')
+        loadPage()
+    }
     
     render(){
         return(
@@ -13,16 +21,16 @@ class QuestionPage extends React.Component{
                     <HomeNav />
                 </header>
                 <section className="container-fluid">
-                    <div className="row">
-                        <div className="h-50 m-1 
-                                        col-md-6 col-lg-6 col-xl-5">
+                    <div className="row justify-content-around">
+                        <div className="mt-2
+                                        col-md-5">
+                            <UserCard mode='question'/>
                             <div className="d-none d-sm-block">
-                                <UserCard mode='question'/>
+                                <QuestionGroup />
                             </div>
-                            <QuestionGroup />
                         </div>
-                        <div className="row p-1 ml-auto mr-auto
-                                            col-md-4 col-lg-5 col-xl-6">
+                        <div className="row mt-2
+                                            col-md-6">
                             <QuestionsForm />
                         </div>
                     </div>

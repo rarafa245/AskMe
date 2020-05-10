@@ -1,17 +1,9 @@
-body{
-  background: #F8F8F8;
-}
-
-h1, h2, h3, h4, h5, h6 {
-  color: #444444;
-}
-
-.bg-steel {
-  background-color: #5f788a;
+textarea {
+  resize: none;
 }
 
 .scroll-small {
-  max-height: 420px;
+  max-height: 300px;
   overflow-y: auto;
 
 }
@@ -19,13 +11,8 @@ h1, h2, h3, h4, h5, h6 {
   display: none; 
 } 
 
-.scroll-big {
-  max-height: 500px;
-  overflow-y: auto;
-}
-
 .cardheight {
-  height: 80px;
+  height: 70px;
 }
 
 .content-section {
@@ -69,29 +56,4 @@ a.article-title:hover {
 ul#leftSideBar {
   display: inline-block;
   text-align: center;
-}
-
-.opacity-0 {
-  opacity:0;
-}
-.opacity-1 {
-  opacity:0.2;
-}
-.opacity-2 {
-  opacity:0.4;
-}
-.opacity-3 {
-  opacity:0.6;
-}
-.opacity-4 {
-  opacity:.8;
-}
-.opacity-5 {
-  opacity:1;
-}
-
-.truncate {
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
 }

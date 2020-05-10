@@ -41,7 +41,6 @@ class LogginForm extends React.Component{
         .then(res => res.json())
         .then(res => {
             if (res.status){
-
                 localStorage.setItem('AWT', res.token)
                 localStorage.setItem('UID', res.username)
                 this.props.history.push({

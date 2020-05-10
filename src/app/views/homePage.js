@@ -1,4 +1,5 @@
 import React from 'react'
+import { loadPage } from '../config'
 import LeftSideBar from '../components/homeComponents/leftSideBar'
 import UserCard from '../components/homeComponents/userCard'
 import HomeNav from '../components/homeComponents/homeNav'
@@ -18,6 +19,7 @@ class Home extends React.Component{
     componentDidMount(){
         localStorage.setItem('LPC', this.props.location.pathname)
         localStorage.setItem('AWTST', 'true')
+        loadPage()
     }
 
     render(){
@@ -30,28 +32,27 @@ class Home extends React.Component{
                 <section className="container-fluid">
                     <div className="row">
 
-                        <aside className="col-3 mt-1
+                        <aside className="col-3 mt-2 px-5
                                             d-none d-sm-none d-md-block
                                             ">
                             <LeftSideBar />
                         </aside>
 
-                        <section className="col-6 mt-1
+                        <section className="col-6 mt-2 px-md-3 px-lg-0
                                             col-12 col-md-9 col-lg-6
                                             ">
                             <UserCard mode="home"/>
                             <QuestionGroup />
                         </section>
 
-                        <asside className="col-3 
+                        <aside className="col-3 mt-2 px-5
                                             d-none d-sm-none d-md-none d-lg-block  
                                             ">
                             <ManageContactsSide />
-                        </asside>
+                        </aside>
 
                     </div>
                 </section>
-
             </div>
         )
     }

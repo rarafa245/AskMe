@@ -1,0 +1,44 @@
+h1, h2, h3, h4, h5, h6 {
+  font-size: 14px;
+  opacity: .9;
+  color: #444444;
+}
+
+p {
+    font-size: 14px;
+    opacity: .9;
+}
+
+.title {
+  font-size: 18px;
+  opacity: .9;
+}
+
+.question-content {
+  font-size: 12px;
+}
+
+.truncate {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.opacity-0 {
+    opacity:0;
+  }
+  .opacity-1 {
+    opacity:0.2;
+  }
+  .opacity-2 {
+    opacity:0.4;
+  }
+  .opacity-3 {
+    opacity:0.6;
+  }
+  .opacity-4 {
+    opacity:.8;
+  }
+  .opacity-5 {
+    opacity:1;
+}
