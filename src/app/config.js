@@ -1,9 +1,7 @@
 import React from 'react'
 import 'bootstrap/dist/css/bootstrap.min.css'
-import {
-        BrowserRouter as Router, 
-        Route, 
-        Switch} from 'react-router-dom'
+import axios from 'axios'
+import { BrowserRouter as Router, Route, Switch} from 'react-router-dom'
 import Login from './views/loginPage'
 import Home from './views/homePage'
 import Register from './views/register'
@@ -11,22 +9,20 @@ import QuestionPage from './views/questionPage'
 import LogOut from './views/logout'
 
 
-class App extends React.Component{
-    // Configure app properties
+function App() {
 
-    render(){
-        return(
-            <Router>
-                <Switch>
-                    <Route exact path={'/'} component={Login}/>
-                    <Route exact path={'/register'} component={Register}/>
-                    <PrivateRoute exact path={'/home'} component={Home}/>
-                    <PrivateRoute exact path={'/logout'} component={LogOut}/>
-                    <Route exact path={'/questions'} component={QuestionPage}/>
-                </Switch>
-            </Router>
-        )
-    }
+    return(
+        <Router>
+            <Switch>
+                <Route exact path={'/'} component={Login}/>
+                <Route exact path={'/register'} component={Register}/>
+                <PrivateRoute exact path={'/home'} component={Home}/>
+                <PrivateRoute exact path={'/logout'} component={LogOut}/>
+                <Route exact path={'/questions'} component={QuestionPage}/>
+            </Switch>
+        </Router>
+    )
+    
 }
 
 
@@ -40,17 +36,15 @@ const PrivateRoute = ({component: Component, ...rest}) => (
 
 function loadPage(){
 
-    fetch("http://192.168.0.23:5000/refresh", {
-        method: "GET",
-        headers: new Headers({
+    axios.get("http://192.168.0.23:5000/refresh", {
+        headers: {
             'Authorization': localStorage.getItem('AWT'),
             'UID': localStorage.getItem('UID')
-        })
+        }
     })
-    .then(res => res.json())
     .then(res => { 
-        if (res.status){
-        localStorage.setItem('AWT', res.token)
+        if (res.data.status){
+        localStorage.setItem('AWT', res.data.token)
         }
     })
 }
