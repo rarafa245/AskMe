@@ -1,37 +1,19 @@
-import React from 'react'
+import React, { useState } from 'react'
 
 
-class QuestionsForm extends React.Component{
-    constructor(){
-        super()
-        this.state = {
-            title: '',
-            content: '',
-            message: '',
-            disabledButton: false
-        }
+function QuestionsForm () {
 
-        this.handleChange = this.handleChange.bind(this)
-    }
-
-    handleChange = (event) => {
-        // Change Input Callback - Change the value of the form inputs
-
-        this.setState({
-            [event.target.name]: event.target.value
-        })
-    }
+    const [title, setTitle] = useState('')
+    const [content, setContent] = useState('')
+    const [message, setMessage] = useState('')
+    const [disabledButton, setDisableButton] = useState(false)
     
 
-    handleSubmit = (event) => {
+    const handleSubmit = (event) => {
 
         event.preventDefault()
-
-        this.setState({
-            message: <Message type={'alert alert-dark text-center'} 
-                                message={'Wait a moment...'} />,
-            disabledButton: true
-        })
+        setMessage( <Message type={'alert alert-dark text-center'} message={'Wait a moment...'} />)
+        setDisableButton(true)
 
         const questionData = new FormData(event.target)
 
@@ -46,72 +28,58 @@ class QuestionsForm extends React.Component{
         .then(res => res.json())
         .then(res => {
             if (res.status) {
-                this.setState({
-                    message: <Message type={'alert alert-info text-center'} 
-                                message={res.message} />,
-                    title: '',
-                    content: '',
-                    disabledButton: false
-                })
+                setMessage( <Message type={'alert alert-info text-center'} message={res.message} /> )
+                setDisableButton(false)
             }
             else {
-                this.setState({
-                    message: <Message type={'alert alert-danger text-center'} 
-                                message={res.message} />,
-                    disabledButton: false
-                })
+                setMessage( <Message type={'alert alert-danger text-center'} message={res.message} /> )
+                setDisableButton(false)
             }
         })
     }
 
+    return(
+        <div className="col-12">
 
-    render(){
-        return(
-            <div className="col-12">
+            <form onSubmit={handleSubmit}>
+                <fieldset className="form-group">
+                    <legend className="border-bottom text-center text-md-left mb-4">New Question?</legend>
 
-                <form onSubmit={this.handleSubmit}>
-                    <fieldset className="form-group">
-                        <legend className="border-bottom text-center text-md-left mb-4">New Question?</legend>
+                    {message}
 
-                        {this.state.message}
+                    <div className="form-group">
+                        <label htmlFor="Title"><h6>Question Title</h6></label>
+                        <input id="Title"
+                                name="title"
+                                value={title}
+                                onChange={ e => setTitle(e.target.value) }
+                                type="text" 
+                                className="form-control mb-2" />
+                        
+                        <label htmlFor="Content"><h6>Whats Your Question?</h6></label>
+                        <textarea id="Content"
+                                name="content"
+                                rows="5" 
+                                cols="50"
+                                value={content} 
+                                onChange={ e => setContent(e.target.value) }
+                                className="form-control" />
+                    </div>
 
-                        <div className="form-group">
-                            <label htmlFor="Title"><h6>Question Title</h6></label>
-                            <input id="Title"
-                                    name="title"
-                                    value={this.state.title}
-                                    onChange={this.handleChange}
-                                    type="text" 
-                                    className="form-control mb-2" />
-                            
-                            <label htmlFor="Content"><h6>Whats Your Question?</h6></label>
-                            <textarea id="Content"
-                                    name="content"
-                                    rows="5" 
-                                    cols="50"
-                                    onChange={this.handleChange}
-                                    value={this.state.content} 
-                                    className="form-control" />
-                        </div>
-
-                        <button type="submit" 
-                                disabled={this.state.disabledButton}
-                                className="btn bg-steel text-white">
-                            Submit
-                        </button>
-                    </fieldset>
-                </form>
-                
-            </div>
-        )
-    }
+                    <button type="submit" 
+                            disabled={disabledButton}
+                            className="btn bg-steel text-white">
+                        Submit
+                    </button>
+                </fieldset>
+            </form>
+            
+        </div>
+    )
+    
 }
 
-function Message(props) {
-    /* Success or Falue alert
-        :parram - type: Type of the message
-                message: Info message
-    */
+const Message = (props) => {
 
     return(
         <div className={props.type} role="alert">
