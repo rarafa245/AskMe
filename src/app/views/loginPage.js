@@ -14,14 +14,16 @@ class Login extends React.Component{
     componentDidMount(){
         
         var awtst = localStorage.getItem('AWTST')
+        var lastPage = localStorage.getItem('LPC')
         if (awtst === 'true') {
             localStorage.clear()
-            localStorage.setItem('LPC', localStorage.getItem('LPC'))
+            localStorage.setItem('LPC', lastPage)
             localStorage.setItem('AWTST', awtst)
         } 
         else {
             localStorage.clear()
             localStorage.setItem('LPC', this.props.location.pathname)
+            localStorage.setItem('AWTST', 'false')
         } 
     }
 

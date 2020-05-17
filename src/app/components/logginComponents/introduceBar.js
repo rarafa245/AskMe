@@ -15,18 +15,7 @@ const initialState = {
 const setBarInfo = (state, action) => {
 
     switch (action) {
-
-        case '/':
-            return {
-                ...state,
-                firstInfo: 'Create new Account',
-                firstInfoLink: '/register',
-                title: 'Your answers are here!',
-                subtitle: 'sign in for free',
-                message: 'Store your questions and answer them. If you need to review such an answer, you can check it out here!'
-            }
-                
-
+        
         case '/register':
             return {
                 ...state,
@@ -36,11 +25,17 @@ const setBarInfo = (state, action) => {
                 subtitle: 'Free for all',
                 message: 'You can ask your questions to get answers from other users and store them for future reference'
             }
-
+        
+        case '/':
         default:
-            return state
-
-
+            return {
+                ...state,
+                firstInfo: 'Create new Account',
+                firstInfoLink: '/register',
+                title: 'Your answers are here!',
+                subtitle: 'sign in for free',
+                message: 'Store your questions and answer them. If you need to review such an answer, you can check it out here!'
+            }
     }
 }
 

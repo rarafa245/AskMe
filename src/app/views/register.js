@@ -8,9 +8,8 @@ class Register extends React.Component{
     // Register new client Page
 
     componentDidMount(){
-        
-        localStorage.setItem('LPC', this.props.location.pathname)
-        
+        localStorage.setItem('LPC', this.props.location.pathname) 
+        localStorage.setItem('AWTST', 'false')
     }
 
     render(){
