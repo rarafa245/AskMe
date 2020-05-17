@@ -1,16 +1,10 @@
-import React from 'react'
+import React, { useState, useEffect } from 'react'
 
-class QuestionGroup extends React.Component{
-    constructor(){
-        super()
-        this.state={
-            userImage: "",
-            questions: "" 
-        }
-    }
+function QuestionGroup() {
 
-    componentDidMount(){
+    const [questions, setQuestions] = useState()
 
+    useEffect(() => {
         fetch("http://192.168.0.23:5000/userQuestions",{
             method: "GET",
             headers: new Headers({
@@ -26,7 +20,6 @@ class QuestionGroup extends React.Component{
 
             for (index in receivedData){
 
-
                 total_question.push(
                             <QuestionCard   key = {index}
                                             introduction={index}
@@ -35,23 +28,24 @@ class QuestionGroup extends React.Component{
                                             content={receivedData[index].content}/>)
             }
 
-            this.setState({ questions: total_question })
+            setQuestions(total_question)
         })
-    }
+
+    }, [])
 
 
-    render(){
-        return(
-            <div className="card scroll-small">
-                <div className="justify-content-around">
-                    <p className="m-2 opacity-3"><strong>Your Recent Questions!</strong></p>
-                </div>
-                <div>
-                    {this.state.questions}
-                </div>
+    
+    return(
+        <div className="card scroll-small">
+            <div className="justify-content-around">
+                <p className="m-2 opacity-3"><strong>Your Recent Questions!</strong></p>
             </div>
-        )
-    }
+            <div>
+                {questions}
+            </div>
+        </div>
+    )
+    
 
 }
 
