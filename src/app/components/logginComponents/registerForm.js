@@ -1,4 +1,5 @@
 import React, { useState } from 'react'
+import axios from 'axios'
 
 function RegisterForm() {
 
@@ -25,26 +26,28 @@ function RegisterForm() {
             return
         }
 
-        const logginData = new FormData(event.target)
-        fetch('http://192.168.0.23:5000/register', {
-            method: 'POST',
-            body: logginData
-        })
-        .then(res => res.json())
-        .then(res => {
-            if (res.status) {
-                setMessage( <Message type={'alert alert-info text-center'} message={res.message} />)
-                setUsername('')
-                setEmail('')
-                setPass('')
-                setPassconf('')
+        const registerData = new FormData(event.target)
+        axios.post('http://192.168.0.23:5000/register', registerData)
+            .then(res => {
+                if (res.data.status) {
+                    setMessage( <Message type={'alert alert-info text-center'} message={res.data.message} />)
+                    setUsername('')
+                    setEmail('')
+                    setPass('')
+                    setPassconf('')
+                    setDisableButton(false)
+                }
+                else {
+                    setMessage( <Message type={'alert alert-danger text-center'} message={res.data.message} />)
+                    setDisableButton(false)
+                }
+            })
+            .catch(err => {
+                setMessage( <Message type={'alert alert-danger text-center'} 
+                                    message='An Error Has Occurred. Try Again !' />
+                    )
                 setDisableButton(false)
-            }
-            else {
-                setMessage( <Message type={'alert alert-danger text-center'} message={res.message} />)
-                setDisableButton(false)
-            }
-        })
+            })
     }
 
 
