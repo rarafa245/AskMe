@@ -1,8 +1,8 @@
 import React, { useState } from 'react'
-import {Link} from 'react-router-dom'
+import axios from 'axios'
 
 
-function LogginForm (props){
+function LogginForm (props) {
     const [email, setEmail] = useState('')
     const [pass, setPass] = useState('')
     const [message, setMessage] = useState()
@@ -13,26 +13,27 @@ function LogginForm (props){
         event.preventDefault()
         const logginData = new FormData(event.target)
 
-        fetch('http://192.168.0.23:5000/login', {
-            method: 'POST',
-            body: logginData
-        })
-        .then(res => res.json())
-        .then(res => {
-            if (res.status){
-                setMessage()
-                localStorage.setItem('AWT', res.token)
-                localStorage.setItem('UID', res.username)
-                props.history.push({
-                    pathname: (localStorage.getItem('AWTST') == 'true' ?
-                                localStorage.getItem('LPC') : '/home')
-                })
-            } else {
+        axios.post('http://192.168.0.23:5000/login', logginData)
+            .then(res => {
+                if (res.data.status){
+                    setMessage()
+                    localStorage.setItem('AWT', res.data.token)
+                    localStorage.setItem('UID', res.data.username)
+                    props.history.push({
+                        pathname: (localStorage.getItem('AWTST') == 'true' ?
+                                    localStorage.getItem('LPC') : '/home')
+                    })
+                } else {
+                    setMessage( <Message type={'alert alert-danger text-center'} 
+                                    message='Invalid Email or Password !' />
+                    )
+                }
+            })
+            .catch(err => {
                 setMessage( <Message type={'alert alert-danger text-center'} 
-                                message='Email ou Senha Invalidos !' />
-                )
-            }
-        })
+                                    message='An Error Has Occurred. Try Again !' />
+                    )
+            })
     }
 
 
