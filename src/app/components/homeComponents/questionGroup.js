@@ -1,22 +1,22 @@
 import React, { useState, useEffect } from 'react'
+import axios from 'axios'
 
 function QuestionGroup() {
 
     const [questions, setQuestions] = useState()
 
     useEffect(() => {
-        fetch("http://192.168.0.23:5000/userQuestions",{
-            method: "GET",
-            headers: new Headers({
+        axios.get("http://192.168.0.23:5000/userQuestions",{
+            headers: {
                 'Authorization': localStorage.getItem('AWT'),
                 'UID': localStorage.getItem('UID')
-            })
+            }
         })
-        .then(res => res.json())
         .then(res => {
+            console.log(res)
             let receivedData, index
             let total_question = []
-            receivedData = JSON.parse(res.message)
+            receivedData = JSON.parse(res.data.message)
 
             for (index in receivedData){
 
