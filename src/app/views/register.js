@@ -1,34 +1,29 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import NavBar from '../components/logginComponents/navbar'
 import RegisterForm from '../components/logginComponents/registerForm'
 import IntroduceBar from '../components/logginComponents/introduceBar'
 
 
-class Register extends React.Component{
-    // Register new client Page
+function Register (props) {
 
-    componentDidMount(){
-        localStorage.setItem('LPC', this.props.location.pathname) 
+    useEffect(() => {
+        localStorage.setItem('LPC', props.location.pathname) 
         localStorage.setItem('AWTST', 'false')
-    }
+    }, [])
 
-    render(){
-        return(
-            <div>
-                <header>
-                    <NavBar />
-                </header>
-                <div className="container-fluid">
-                    <div className="row justify-content-lg-around">
-                        <RegisterForm />
-                        <IntroduceBar />
-                    </div>
+    return(
+        <div>
+            <header>
+                <NavBar />
+            </header>
+            <div className="container-fluid">
+                <div className="row justify-content-lg-around">
+                    <RegisterForm />
+                    <IntroduceBar />
                 </div>
             </div>
-        )
-    }
-
-    
+        </div>
+    )
 }
 
 export default Register

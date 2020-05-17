@@ -107,7 +107,6 @@ function RegisterForm() {
             </form>
         </div>
     )
-    
 }
 
 const Message = (props) => {
