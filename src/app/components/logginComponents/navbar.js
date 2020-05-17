@@ -1,8 +1,5 @@
 import React, { useState, useEffect } from 'react'
-import {
-    Collapse,
-    NavbarToggler,
-  } from 'reactstrap';
+import { Collapse, NavbarToggler } from 'reactstrap';
 import { Link } from 'react-router-dom'
 
 function NavBar(){
@@ -32,8 +29,7 @@ function NavBar(){
     
 }
 
-
-function NavBarContent(props){
+const NavBarContent = (props) => {
     return(
         <li className="nav-item active">
             <Link className="nav-link text-white" to={props.route}>{props.content}<span className="sr-only">(current)</span></Link>

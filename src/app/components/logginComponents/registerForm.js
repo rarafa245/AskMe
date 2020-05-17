@@ -1,64 +1,30 @@
-import React from 'react'
+import React, { useState } from 'react'
 
-class RegisterForm extends React.Component{
-    constructor(){
-        super()
-        this.state = {
-            username: '',
-            email: '',
-            pass: '',
-            passconf: '',
-            message: '',
-            disabledButton: false
-        }
+function RegisterForm() {
 
-        this.handleChange = this.handleChange.bind(this)
-    }
+    const [username, setUsername] = useState('')
+    const [email, setEmail] = useState('')
+    const [pass, setPass] = useState('')
+    const [passconf, setPassconf] = useState('')
+    const [message, setMessage] = useState()
+    const [disabledButton, setDisableButton] = useState(false)
 
 
-    handleChange = (event) => {
-        // Change Input Callback - Change the value of the form inputs
-
-        this.setState({
-            [event.target.name]: event.target.value
-        })
-    }
-
-    handleSubmit = (event) => {
-        /* Submit Callback - Send values to Server
-            * Informs the customer about the requisition 
-            * Checks whether the data meets the requirements
-            * Send the datas
-            * Return the information of Success or Failuer of process
-        */
+    const handleSubmit = (event) => {
         
         event.preventDefault()
-        
-        // Changes status while not receiving storage confirmation
-        // Information processing alert
-        this.setState({
-            message: <Message type={'alert alert-dark text-center'} 
-                                message={'Wait a moment...'} />,
-            disabledButton: true
-        })
 
-        
-        // Changing the state if password not confirmed
-        // Information processing alert
-        // Return and stop the callback 
+        setMessage(<Message type={'alert alert-dark text-center'} message={'Wait a moment...'} />)
+        setDisableButton(true)
+
+
         if ( !(event.target.pass.value == event.target.passconf.value) ) {
-            this.setState({
-                message: <Message type={'alert alert-danger text-center'} 
-                            message={"Password don't match!"} />,
-                disabledButton: false
-            })
 
+            setMessage(<Message type={'alert alert-danger text-center'} message={"Password don't match!"} /> )
+            setDisableButton(false)
             return
         }
 
-
-        // Get the  information from form and post it
-        // Send an confrm or failure message
         const logginData = new FormData(event.target)
         fetch('http://192.168.0.23:5000/register', {
             method: 'POST',
@@ -67,95 +33,84 @@ class RegisterForm extends React.Component{
         .then(res => res.json())
         .then(res => {
             if (res.status) {
-                this.setState({
-                    message: <Message type={'alert alert-info text-center'} 
-                                message={res.message} />,
-                    username: '',
-                    email: '',
-                    pass: '',
-                    passconf: '',
-                    disabledButton: false
-                })
+                setMessage( <Message type={'alert alert-info text-center'} message={res.message} />)
+                setUsername('')
+                setEmail('')
+                setPass('')
+                setPassconf('')
+                setDisableButton(false)
             }
             else {
-                this.setState({
-                    message: <Message type={'alert alert-danger text-center'} 
-                                message={res.message} />,
-                    disabledButton: false
-                })
+                setMessage( <Message type={'alert alert-danger text-center'} message={res.message} />)
+                setDisableButton(false)
             }
         })
     }
 
-    render(){
 
-        return(
-            <div className="px-4 col-lg-6">
-                <form onSubmit={this.handleSubmit} className="mt-4">
-                    <fieldset className="form-group">
-                        <legend className="border-bottom mb-4">Create a New Account !</legend>
+    return (
+        <div className="px-4 col-lg-6">
+            <form onSubmit={handleSubmit} className="mt-4">
+                <fieldset className="form-group">
+                    <legend className="border-bottom mb-4">Create a New Account !</legend>
+                    
+                    {message}
+
+                    <div className="form-group">
+                        <label htmlFor="Username">New Username</label>
+                        <input id="Username"
+                                name="username"
+                                value={username}
+                                onChange={ e => setUsername(e.target.value) }
+                                placeholder="Insert an Username"
+                                type="text" 
+                                className="form-control mb-3" 
+                                aria-describedby="emailHelp" />
+
+                        <label htmlFor="Email">New Email</label>
+                        <input id="Email"
+                                name="email"
+                                value={email}
+                                onChange={ e => setEmail(e.target.value) }
+                                placeholder="Insert an Email"
+                                type="email" 
+                                className="form-control mb-3" 
+                                aria-describedby="emailHelp" />
                         
-                        {this.state.message}
+                        <label htmlFor="Pass">User Password</label>
+                        <input id="Pass"
+                                name="pass"
+                                value={pass}
+                                onChange={ e => setPass(e.target.value) }
+                                placeholder="Insert an Password" 
+                                type="password" 
+                                className="form-control mb-3" 
+                                aria-describedby="emailHelp" />
+                        
+                        <label htmlFor="Passconf">Confirm User Password</label>
+                        <input id="Passconf"
+                                name="passconf"
+                                value={passconf}
+                                onChange={e => setPassconf(e.target.value)}
+                                placeholder="Insert an Password" 
+                                type="password" 
+                                className="form-control mb-3" 
+                                aria-describedby="emailHelp" />
+                    </div>
 
-                        <div className="form-group">
-                            <label htmlFor="Username">New Username</label>
-                            <input id="Username"
-                                    name="username"
-                                    value={this.state.username}
-                                    onChange={this.handleChange}
-                                    placeholder="Insert an Username"
-                                    type="text" 
-                                    className="form-control mb-3" 
-                                    aria-describedby="emailHelp" />
-
-                            <label htmlFor="Email">New Email</label>
-                            <input id="Email"
-                                    name="email"
-                                    value={this.state.email}
-                                    onChange={this.handleChange}
-                                    placeholder="Insert an Email"
-                                    type="email" 
-                                    className="form-control mb-3" 
-                                    aria-describedby="emailHelp" />
-                            
-                            <label htmlFor="Pass">User Password</label>
-                            <input id="Pass"
-                                    name="pass"
-                                    onChange={this.handleChange}
-                                    value={this.state.pass}
-                                    placeholder="Insert an Password" 
-                                    type="password" 
-                                    className="form-control mb-3" 
-                                    aria-describedby="emailHelp" />
-                            
-                            <label htmlFor="Passconf">Confirm User Password</label>
-                            <input id="Passconf"
-                                    name="passconf"
-                                    onChange={this.handleChange}
-                                    value={this.state.passconf}
-                                    placeholder="Insert an Password" 
-                                    type="password" 
-                                    className="form-control mb-3" 
-                                    aria-describedby="emailHelp" />
-                        </div>
-
-                        <button type="submit"
-                                disabled={this.state.disabledButton}
-                            className="btn bg-steel text-white">
-                            Register
-                        </button>
-                    </fieldset>
-                </form>
-            </div>
-        )
-    }
+                    <button type="submit"
+                            disabled={disabledButton}
+                        className="btn bg-steel text-white">
+                        Register
+                    </button>
+                </fieldset>
+            </form>
+        </div>
+    )
+    
 }
 
-function Message(props) {
-    /* Success or Falue alert
-        :parram - type: Type of the message
-                message: Info message
-    */
+const Message = (props) => {
     
     return(
         <div className={props.type} role="alert">
