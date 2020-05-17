@@ -6,6 +6,7 @@ function QuestionGroup() {
     const [questions, setQuestions] = useState()
 
     useEffect(() => {
+
         axios.get("http://192.168.0.23:5000/userQuestions",{
             headers: {
                 'Authorization': localStorage.getItem('AWT'),
@@ -29,7 +30,6 @@ function QuestionGroup() {
 
             setQuestions(total_question)
         })
-
     }, [])
 
 

@@ -34,6 +34,12 @@ function QuestionsForm () {
                 setDisableButton(false)
             }
         })
+        .catch(err => {
+                setMessage( <Message type={'alert alert-danger text-center'} 
+                                    message='An Error Has Occurred. Try Again !' />
+                    )
+                setDisableButton(false)
+            })
     }
 
     return(
