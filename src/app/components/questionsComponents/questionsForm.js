@@ -1,4 +1,5 @@
 import React, { useState } from 'react'
+import axios from 'axios'
 
 
 function QuestionsForm () {
@@ -17,22 +18,19 @@ function QuestionsForm () {
 
         const questionData = new FormData(event.target)
 
-        fetch('http://192.168.0.23:5000/regQuestion', {
-            method: 'POST',
-            headers: new Headers({
+        axios.post('http://192.168.0.23:5000/regQuestion', questionData , {
+            headers: {
                 'Authorization': localStorage.getItem('AWT'),
                 'UID': localStorage.getItem('UID')
-            }),
-            body: questionData
+            }
         })
-        .then(res => res.json())
         .then(res => {
-            if (res.status) {
-                setMessage( <Message type={'alert alert-info text-center'} message={res.message} /> )
+            if (res.data.status) {
+                setMessage( <Message type={'alert alert-info text-center'} message={res.data.message} /> )
                 setDisableButton(false)
             }
             else {
-                setMessage( <Message type={'alert alert-danger text-center'} message={res.message} /> )
+                setMessage( <Message type={'alert alert-danger text-center'} message={res.data.message} /> )
                 setDisableButton(false)
             }
         })

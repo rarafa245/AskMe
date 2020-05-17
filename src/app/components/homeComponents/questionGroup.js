@@ -13,7 +13,6 @@ function QuestionGroup() {
             }
         })
         .then(res => {
-            console.log(res)
             let receivedData, index
             let total_question = []
             receivedData = JSON.parse(res.data.message)
