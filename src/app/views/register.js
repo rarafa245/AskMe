@@ -7,6 +7,12 @@ import IntroduceBar from '../components/logginComponents/introduceBar'
 class Register extends React.Component{
     // Register new client Page
 
+    componentDidMount(){
+        
+        localStorage.setItem('LPC', this.props.location.pathname)
+        
+    }
+
     render(){
         return(
             <div>
@@ -16,10 +22,7 @@ class Register extends React.Component{
                 <div className="container-fluid">
                     <div className="row justify-content-lg-around">
                         <RegisterForm />
-                        <IntroduceBar  mode='register'
-                                    title='Come on, Join This Community!'
-                                    subtitle='Free for all'
-                                    message='You can ask your questions to get answers from other users and store them for future reference'/>
+                        <IntroduceBar />
                     </div>
                 </div>
             </div>
