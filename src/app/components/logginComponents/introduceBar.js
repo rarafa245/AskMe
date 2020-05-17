@@ -44,7 +44,7 @@ const IntroduceBar =  () => {
 
     const [barInfos, dispatch] = useReducer(setBarInfo, initialState)
     
-    useEffect(() => dispatch(localStorage.getItem('LPC')) , [])
+    useEffect(() => dispatch(localStorage.getItem('LPC')) , [localStorage.getItem('LPC')])
 
 
     return(
