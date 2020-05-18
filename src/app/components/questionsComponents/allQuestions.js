@@ -1,14 +1,13 @@
 import React, { useState, useEffect } from 'react'
-import QuestionCard from './questionCard'
+import QuestionCard from '../homeComponents/questionCard'
 import axios from 'axios'
 
-function QuestionGroup() {
+function AllQuestions() {
 
     const [questions, setQuestions] = useState()
 
     useEffect(() => {
-
-        axios.get("http://192.168.0.23:5000/userQuestions",{
+        axios.get('http://192.168.0.23:5000/allquestions', {
             headers: {
                 'Authorization': localStorage.getItem('AWT'),
                 'UID': localStorage.getItem('UID')
@@ -33,17 +32,15 @@ function QuestionGroup() {
         })
     }, [])
 
-    
+
     return(
-        <div className="card scroll-small">
-            <p className="m-2 opacity-3"><strong>Your Recent Questions!</strong></p>
+        <div className="card mt-2 col-12">
+            <p className="m-2 opacity-3"><strong>All Your Questions</strong></p>
             <div>
                 {questions}
             </div>
         </div>
     )
-    
-
 }
 
-export default QuestionGroup
+export default AllQuestions
