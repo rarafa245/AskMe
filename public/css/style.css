@@ -2,15 +2,6 @@ textarea {
   resize: none;
 }
 
-.scroll-small {
-  max-height: 300px;
-  overflow-y: auto;
-
-}
-.scroll-small::-webkit-scrollbar { 
-  display: none; 
-} 
-
 .cardheight {
   height: 70px;
 }

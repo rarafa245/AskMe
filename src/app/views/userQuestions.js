@@ -18,13 +18,13 @@ function UserQuestions (props) {
                 <HomeNav />
             </header>
             <section className="container-fluid">
-                <div className="row justify-content-around p-0">
+                <div className="row justify-content-center p-0">
 
                     <div className="mt-2 col-md-3">
                         <LeftMenu />
                     </div>
 
-                    <div className="row mt-2 col-md-9">
+                    <div className="row mt-2 col-md-8">
                         <AllQuestions />
                     </div>
 
