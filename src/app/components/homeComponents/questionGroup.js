@@ -1,26 +1,24 @@
-import React, { useState, useEffect } from 'react'
+import React, { useReducer, useEffect } from 'react'
 import QuestionCard from './questionCard'
 import axios from 'axios'
 
-function QuestionGroup() {
+const initialState = {
+    loading: true,
+    error: '',
+    payload: [],
+}
 
-    const [questions, setQuestions] = useState()
+const reducer = (state, action) => {
+    
+    switch (action.type) {
 
-    useEffect(() => {
+        case 'FETCH_SUCCESS':
 
-        axios.get("http://192.168.0.23:5000/userQuestions",{
-            headers: {
-                'Authorization': localStorage.getItem('AWT'),
-                'UID': localStorage.getItem('UID')
-            }
-        })
-        .then(res => {
-            let receivedData, index
+            let receivedData = action.data
+            delete receivedData.pages
+
             let total_question = []
-            receivedData = JSON.parse(res.data.message)
-
-            for (index in receivedData){
-
+            for (let index in receivedData){
                 total_question.push(
                             <QuestionCard   key = {index}
                                             introduction={index}
@@ -28,9 +26,41 @@ function QuestionGroup() {
                                             title={receivedData[index].title}
                                             content={receivedData[index].content}/>)
             }
+            
+            return ({
+                ...state,
+                loading: false,
+                payload: total_question,
+            })
+        
+        case 'FETCH_ERROR':
+            return
 
-            setQuestions(total_question)
+    }
+}
+
+
+function QuestionGroup() {
+
+    const [questions, dispatch] = useReducer(reducer, initialState)
+
+    useEffect(() => {
+
+        axios.get(`http://localhost:5000/allquestions/5/1`, {
+            headers: {
+                'Authorization': localStorage.getItem('AWT'),
+                'UID': localStorage.getItem('UID')
+            }
         })
+        .then(res => {
+            dispatch({
+                type: 'FETCH_SUCCESS',
+                data: JSON.parse(res.data.message)})
+        })
+        .catch(err => {
+            console.log(err)
+        })
+
     }, [])
 
     
@@ -38,7 +68,7 @@ function QuestionGroup() {
         <div className="card scroll-small">
             <p className="m-2 opacity-3"><strong>Your Recent Questions!</strong></p>
             <div>
-                {questions}
+                {questions.payload}
             </div>
         </div>
     )

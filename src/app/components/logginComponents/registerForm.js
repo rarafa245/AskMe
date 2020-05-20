@@ -27,7 +27,7 @@ function RegisterForm() {
         }
 
         const registerData = new FormData(event.target)
-        axios.post('http://192.168.0.23:5000/register', registerData)
+        axios.post('http://localhost:5000/register', registerData)
             .then(res => {
                 if (res.data.status) {
                     setMessage( <Message type={'alert alert-info text-center'} message={res.data.message} />)

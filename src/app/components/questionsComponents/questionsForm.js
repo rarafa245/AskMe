@@ -18,7 +18,7 @@ function QuestionsForm () {
 
         const questionData = new FormData(event.target)
 
-        axios.post('http://192.168.0.23:5000/regQuestion', questionData , {
+        axios.post('http://localhost:5000/regQuestion', questionData , {
             headers: {
                 'Authorization': localStorage.getItem('AWT'),
                 'UID': localStorage.getItem('UID')

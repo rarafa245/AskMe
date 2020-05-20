@@ -63,7 +63,7 @@ function AllQuestions() {
 
     useEffect(() => {
 
-        axios.get(`http://192.168.0.23:5000/allquestions/${url}`, {
+        axios.get(`http://localhost:5000/allquestions/10/${url}`, {
             headers: {
                 'Authorization': localStorage.getItem('AWT'),
                 'UID': localStorage.getItem('UID')

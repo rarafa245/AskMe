@@ -5,7 +5,7 @@ function UserCard(){
     const [pic, setPic] = useState()
 
     useEffect(() => {
-        fetch("http://192.168.0.23:5000/profilepic",{
+        fetch("http://localhost:5000/profilepic",{
             method: "GET",
         })
         .then(res => res.blob())

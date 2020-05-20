@@ -13,7 +13,7 @@ function LogginForm (props) {
         event.preventDefault()
         const logginData = new FormData(event.target)
 
-        axios.post('http://192.168.0.23:5000/login', logginData)
+        axios.post('http://localhost:5000/login', logginData)
             .then(res => {
                 if (res.data.status){
                     setMessage()

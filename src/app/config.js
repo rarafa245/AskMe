@@ -38,7 +38,7 @@ const PrivateRoute = ({component: Component, ...rest}) => (
 
 function loadPage(){
 
-    axios.get("http://192.168.0.23:5000/refresh", {
+    axios.get("http://localhost/refresh", {
         headers: {
             'Authorization': localStorage.getItem('AWT'),
             'UID': localStorage.getItem('UID')
