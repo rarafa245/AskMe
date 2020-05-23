@@ -1,5 +1,6 @@
 import React, { useState } from 'react'
 import axios from 'axios'
+import ProcessInfoCard from '../infoComponents/precessInfoCards'
 
 function RegisterForm() {
 
@@ -9,20 +10,24 @@ function RegisterForm() {
     const [passconf, setPassconf] = useState('')
     const [message, setMessage] = useState()
     const [disabledButton, setDisableButton] = useState(false)
+    const [loadingButton, setLoadingButton] = useState(false)
 
 
     const handleSubmit = (event) => {
         
+        
         event.preventDefault()
 
-        setMessage(<Message type={'alert alert-dark text-center'} message={'Wait a moment...'} />)
+        setMessage(<ProcessInfoCard type={'LOADING'} message={'Wait a moment...'} />)
+        setLoadingButton(true)
         setDisableButton(true)
 
 
         if ( !(event.target.pass.value == event.target.passconf.value) ) {
 
-            setMessage(<Message type={'alert alert-danger text-center'} message={"Password don't match!"} /> )
+            setMessage(<ProcessInfoCard type={'FAILURE'} message={"Password don't match!"} /> )
             setDisableButton(false)
+            setLoadingButton(false)
             return
         }
 
@@ -30,7 +35,8 @@ function RegisterForm() {
         axios.post('http://localhost:5000/register', registerData)
             .then(res => {
                 if (res.data.status) {
-                    setMessage( <Message type={'alert alert-info text-center'} message={res.data.message} />)
+                    setMessage( <ProcessInfoCard type={'SUCCESS'} message={res.data.message} />)
+                    setLoadingButton(false)
                     setUsername('')
                     setEmail('')
                     setPass('')
@@ -38,15 +44,17 @@ function RegisterForm() {
                     setDisableButton(false)
                 }
                 else {
-                    setMessage( <Message type={'alert alert-danger text-center'} message={res.data.message} />)
+                    setMessage( <ProcessInfoCard type={'FAILURE'} message={res.data.message} />)
                     setDisableButton(false)
+                    setLoadingButton(false)
                 }
             })
             .catch(err => {
-                setMessage( <Message type={'alert alert-danger text-center'} 
+                setMessage( <ProcessInfoCard type={'FAILURE'} 
                                     message='An Error Has Occurred. Try Again !' />
                     )
                 setDisableButton(false)
+                setLoadingButton(false)
             })
     }
 
@@ -104,23 +112,17 @@ function RegisterForm() {
                     <button type="submit"
                             disabled={disabledButton}
                         className="btn bg-steel text-white">
+                        { loadingButton ? (<div className="spinner-border spinner-border-sm mr-2" role="status">
+                                        <span className="sr-only">Loading...</span>
+                                    </div>) : ''
+                        }
                         Register
                     </button>
+
                 </fieldset>
             </form>
         </div>
     )
 }
-
-const Message = (props) => {
-    
-    return(
-        <div className={props.type} role="alert">
-            {props.message}
-        </div>
-    )
-    
-}
-
 
 export default RegisterForm

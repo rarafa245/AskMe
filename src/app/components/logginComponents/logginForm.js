@@ -1,24 +1,25 @@
 import React, { useState } from 'react'
 import axios from 'axios'
+import ProcessInfoCard from '../infoComponents/precessInfoCards'
 
 
 function LogginForm (props) {
     const [email, setEmail] = useState('')
     const [pass, setPass] = useState('')
     const [message, setMessage] = useState()
-    const [loading, setLoading] = useState(false)
+    const [loadingButton, setLoadingButton] = useState(false)
     
 
     const handleSubmit = (event) => {
 
-        setLoading(true)
+        setLoadingButton(true)
         event.preventDefault()
         const logginData = new FormData(event.target)
 
         axios.post('http://localhost:5000/login', logginData)
             .then(res => {
                 if (res.data.status){
-                    setLoading(false)
+                    setLoadingButton(false)
                     setMessage()
                     localStorage.setItem('AWT', res.data.token)
                     localStorage.setItem('UID', res.data.username)
@@ -27,15 +28,15 @@ function LogginForm (props) {
                                     localStorage.getItem('LPC') : '/home')
                     })
                 } else {
-                    setLoading(false)
-                    setMessage( <Message type={'alert alert-danger text-center'} 
+                    setLoadingButton(false)
+                    setMessage( <ProcessInfoCard type={'FAILURE'} 
                                     message='Invalid Email or Password !' />
                     )
                 }
             })
             .catch(err => {
-                setLoading(false)
-                setMessage( <Message type={'alert alert-danger text-center'} 
+                setLoadingButton(false)
+                setMessage( <ProcessInfoCard type={'FAILURE'} 
                                     message='An Error Has Occurred. Try Again !' />
                     )
             })
@@ -73,24 +74,16 @@ function LogginForm (props) {
 
                     <button type="submit" 
                         className="btn bg-steel text-white">
-                        { loading ? (<div className="spinner-border spinner-border-sm mr-2" role="status">
+                        { loadingButton ? (<div className="spinner-border spinner-border-sm mr-2" role="status">
                                         <span className="sr-only">Loading...</span>
                                     </div>) : ''
                         }
                         Log In
                     </button>
+                    
                 </fieldset>
             </form>
             
-        </div>
-    )
-}
-
-function Message(props) {
-
-    return(
-        <div className={props.type} role="alert">
-            {props.message}
         </div>
     )
 }
