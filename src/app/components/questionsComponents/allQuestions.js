@@ -1,11 +1,12 @@
 import React, { useState, useReducer, useEffect } from 'react'
-import QuestionCard from '../infoComponents/questionCard'
 import axios from 'axios'
+import QuestionCard from '../infoComponents/questionCard'
+import ProcessInfoCard from '../infoComponents/processInfoCards'
+import { Spinner } from '../infoComponents/loadSpinner'
 
 const initialState = {
-    lastPage: '',
     loading: true,
-    error: '',
+    lastPage: '',
     payload: [],
     pages: []
 }
@@ -14,7 +15,7 @@ const reducer = (state, action) => {
     
     switch (action.type) {
 
-        case 'FETCH_SUCCESS':
+        case true:
 
             let receivedData, allPages
             let receivedPages = []
@@ -42,17 +43,20 @@ const reducer = (state, action) => {
 
             return ({
                 ...state,
-                lastPage: allPages,
                 loading: false,
+                lastPage: allPages,
                 payload: total_question,
                 pages: receivedPages
             })
         
-        case 'FETCH_ERROR':
-            return
-        
+        case false:
         default:
-            return
+            action.errorFunc(<ProcessInfoCard type={'FAILURE'} 
+                                            message='An Error Has Occurred. Try Again !' />)
+            return ({
+            ...state,
+            loading: false,
+            })
 
     }
 }
@@ -62,6 +66,7 @@ function AllQuestions() {
 
     const [url, setUrl] = useState('1')
     const [questions, dispatch] = useReducer(reducer, initialState)
+    const [errorInfo, setErrorInfo] = useState()
     
 
     useEffect(() => {
@@ -74,37 +79,53 @@ function AllQuestions() {
         })
         .then(res => {
             dispatch({
-                type: 'FETCH_SUCCESS',
                 func: setUrl,
-                data: JSON.parse(res.data.message)})
+                type: JSON.parse(res.data.status),
+                data: JSON.parse(res.data.message)
+            })
         })
         .catch(err => {
-            console.log(err)
+            dispatch({
+                type: false,
+                errorFunc: setErrorInfo
+            })
         })
 
     }, [url])
 
 
     return (
-        <div className="card mt-2 col-12">
-            <p className="m-2 opacity-3"><strong>All Your Questions - Page {url}</strong></p>
-            <div className="card m-1 scroll-big">
-                {questions.payload}
-            </div>
 
-            <nav className="mt-3">
-                <ul className="pagination">
-                    <li className="page-item page-link" onClick={() => { changePage('PREVIOUS', setUrl, url, questions.lastPage) }}>
-                        Prev
-                    </li>
-                        {questions.pages}
-                    <li className="page-item page-link" onClick={() => { changePage('NEXT', setUrl, url, questions.lastPage) }}>
-                        Next
-                    </li>
-                </ul>
-            </nav>
+         (questions.loading) ? 
+            (   <div className="mt-5 col-12">
+                    <div className="d-flex justify-content-center">
+                        <Spinner/> 
+                    </div>
+                </div> 
+            )
+            :
+            (
+                <div className="card mt-2 col-12">
+                    <p className="m-2 opacity-3"><strong>All Your Questions - Page {url}</strong></p>
+                    <div className="card m-1 scroll-big">
+                        {errorInfo}
+                        {questions.payload}
+                    </div>
 
-        </div>
+                    <nav className="mt-3">
+                        <ul className="pagination">
+                            <li className="page-item page-link" onClick={() => { changePage('PREVIOUS', setUrl, url, questions.lastPage) }}>
+                                Prev
+                            </li>
+                                {questions.pages}
+                            <li className="page-item page-link" onClick={() => { changePage('NEXT', setUrl, url, questions.lastPage) }}>
+                                Next
+                            </li>
+                        </ul>
+                    </nav>
+
+                </div>
+            ) 
     )
 }
 
