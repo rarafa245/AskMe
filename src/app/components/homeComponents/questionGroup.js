@@ -1,6 +1,8 @@
-import React, { useReducer, useEffect } from 'react'
-import QuestionCard from '../infoComponents/questionCard'
+import React, { useReducer, useEffect, useState } from 'react'
 import axios from 'axios'
+import QuestionCard from '../infoComponents/questionCard'
+import ProcessInfoCard from '../infoComponents/precessInfoCards'
+
 
 const initialState = {
     loading: true,
@@ -9,10 +11,11 @@ const initialState = {
 }
 
 const reducer = (state, action) => {
+
     
     switch (action.type) {
 
-        case 'FETCH_SUCCESS':
+        case true:
 
             let receivedData = action.data
             delete receivedData.pages
@@ -32,12 +35,14 @@ const reducer = (state, action) => {
                 loading: false,
                 payload: total_question,
             })
-        
-        case 'FETCH_ERROR':
-            return
 
+        case false:
         default:
-            return
+            action.errorFunc(<ProcessInfoCard type={'FAILURE'} 
+                                            message='An Error Has Occurred. Try Again !' />)
+            return ({
+                ...state,
+            })
 
     }
 }
@@ -46,6 +51,8 @@ const reducer = (state, action) => {
 function QuestionGroup() {
 
     const [questions, dispatch] = useReducer(reducer, initialState)
+    const [loadingCards, setLoadingCards] = useState(true)
+    const [errorInfo, setErrorInfo] = useState()
 
     useEffect(() => {
 
@@ -56,12 +63,19 @@ function QuestionGroup() {
             }
         })
         .then(res => {
+            setLoadingCards(false)
             dispatch({
-                type: 'FETCH_SUCCESS',
-                data: JSON.parse(res.data.message)})
+                type: JSON.parse(res.data.status),
+                data: JSON.parse(res.data.message),
+                errorFunc: setErrorInfo
+            })
         })
         .catch(err => {
-            console.log(err)
+            setLoadingCards(false)
+            dispatch({
+                type: false,
+                errorFunc: setErrorInfo
+            })
         })
 
     }, [])
@@ -71,6 +85,13 @@ function QuestionGroup() {
         <div className="card scroll-small">
             <p className="m-2 opacity-3"><strong>Your Recent Questions!</strong></p>
             <div>
+                <div className="d-flex justify-content-center">
+                    { loadingCards ? (<div className="spinner-border spinner-border mt-3 mb-5" role="status">
+                                    <span className="sr-only text-center">Loading...</span>
+                                </div>) : ''
+                    }
+                </div>
+                {errorInfo}
                 {questions.payload}
             </div>
         </div>

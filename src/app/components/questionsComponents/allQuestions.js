@@ -50,6 +50,9 @@ const reducer = (state, action) => {
         
         case 'FETCH_ERROR':
             return
+        
+        default:
+            return
 
     }
 }
