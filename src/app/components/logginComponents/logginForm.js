@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import axios from 'axios'
-import ProcessInfoCard from '../infoComponents/precessInfoCards'
+import ProcessInfoCard from '../infoComponents/processInfoCards'
 import { ButtonSpinner } from '../infoComponents/loadSpinner'
 
 
@@ -13,8 +13,8 @@ function LogginForm (props) {
 
     const handleSubmit = (event) => {
 
-        setLoadingButton(true)
         event.preventDefault()
+        setLoadingButton(true)
         const logginData = new FormData(event.target)
 
         axios.post('http://localhost:5000/login', logginData)

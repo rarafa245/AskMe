@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import axios from 'axios'
-import ProcessInfoCard from '../infoComponents/precessInfoCards'
+import ProcessInfoCard from '../infoComponents/processInfoCards'
 import { ButtonSpinner } from '../infoComponents/loadSpinner'
 
 function RegisterForm() {

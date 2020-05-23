@@ -1,19 +1,16 @@
 import React, { useReducer, useEffect, useState } from 'react'
 import axios from 'axios'
 import QuestionCard from '../infoComponents/questionCard'
-import ProcessInfoCard from '../infoComponents/precessInfoCards'
-import {Spinner} from '../infoComponents/loadSpinner'
+import ProcessInfoCard from '../infoComponents/processInfoCards'
+import { Spinner } from '../infoComponents/loadSpinner'
 
 
 const initialState = {
-    loading: true,
-    error: '',
     payload: [],
 }
 
 const reducer = (state, action) => {
 
-    
     switch (action.type) {
 
         case true:
@@ -33,7 +30,6 @@ const reducer = (state, action) => {
             
             return ({
                 ...state,
-                loading: false,
                 payload: total_question,
             })
 
@@ -87,7 +83,7 @@ function QuestionGroup() {
             <p className="m-2 opacity-3"><strong>Your Recent Questions!</strong></p>
             <div>
                 <div className="d-flex justify-content-center">
-                    { loadingCards  ?   <Spinner/> : ''}
+                    { loadingCards ? <Spinner/> : ''}
                 </div>
                 {errorInfo}
                 {questions.payload}

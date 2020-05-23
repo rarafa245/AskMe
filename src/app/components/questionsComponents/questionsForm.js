@@ -1,5 +1,7 @@
 import React, { useState } from 'react'
 import axios from 'axios'
+import ProcessInfoCard from '../infoComponents/processInfoCards'
+import { ButtonSpinner } from '../infoComponents/loadSpinner'
 
 
 function QuestionsForm () {
@@ -8,12 +10,14 @@ function QuestionsForm () {
     const [content, setContent] = useState('')
     const [message, setMessage] = useState('')
     const [disabledButton, setDisableButton] = useState(false)
+    const [loadingButton, setLoadingButton] = useState(false)
     
 
     const handleSubmit = (event) => {
 
         event.preventDefault()
-        setMessage( <Message type={'alert alert-dark text-center'} message={'Wait a moment...'} />)
+        setLoadingButton(true)
+        setMessage( <ProcessInfoCard type={'LOADING'} message={'Wait a moment...'} />)
         setDisableButton(true)
 
         const questionData = new FormData(event.target)
@@ -26,18 +30,20 @@ function QuestionsForm () {
         })
         .then(res => {
             if (res.data.status) {
-                setMessage( <Message type={'alert alert-info text-center'} message={res.data.message} /> )
+                setMessage( <ProcessInfoCard type={'SUCCESS'} message={res.data.message} /> )
+                setLoadingButton(false)
                 setDisableButton(false)
             }
             else {
-                setMessage( <Message type={'alert alert-danger text-center'} message={res.data.message} /> )
+                setMessage( <ProcessInfoCard type={'FAILURE'} message={res.data.message} /> )
+                setLoadingButton(false)
                 setDisableButton(false)
             }
         })
         .catch(err => {
-                setMessage( <Message type={'alert alert-danger text-center'} 
-                                    message='An Error Has Occurred. Try Again !' />
-                    )
+                setMessage( <ProcessInfoCard type={'FAILURE'} 
+                                             message='An Error Has Occurred. Try Again !' />)
+                setLoadingButton(false)
                 setDisableButton(false)
             })
     }
@@ -73,23 +79,16 @@ function QuestionsForm () {
                     <button type="submit" 
                             disabled={disabledButton}
                             className="btn bg-steel text-white">
+                        { loadingButton ? <ButtonSpinner/> : ''}
                         Submit
                     </button>
+
                 </fieldset>
             </form>
             
         </div>
     )
     
-}
-
-const Message = (props) => {
-
-    return(
-        <div className={props.type} role="alert">
-            {props.message}
-        </div>
-    )
 }
 
 export default QuestionsForm
