@@ -2,6 +2,7 @@ import React, { useReducer, useEffect, useState } from 'react'
 import axios from 'axios'
 import QuestionCard from '../infoComponents/questionCard'
 import ProcessInfoCard from '../infoComponents/precessInfoCards'
+import {Spinner} from '../infoComponents/loadSpinner'
 
 
 const initialState = {
@@ -86,10 +87,7 @@ function QuestionGroup() {
             <p className="m-2 opacity-3"><strong>Your Recent Questions!</strong></p>
             <div>
                 <div className="d-flex justify-content-center">
-                    { loadingCards ? (<div className="spinner-border spinner-border mt-3 mb-5" role="status">
-                                    <span className="sr-only text-center">Loading...</span>
-                                </div>) : ''
-                    }
+                    { loadingCards  ?   <Spinner/> : ''}
                 </div>
                 {errorInfo}
                 {questions.payload}

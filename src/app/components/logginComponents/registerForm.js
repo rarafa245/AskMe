@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 import axios from 'axios'
 import ProcessInfoCard from '../infoComponents/precessInfoCards'
+import { ButtonSpinner } from '../infoComponents/loadSpinner'
 
 function RegisterForm() {
 
@@ -112,9 +113,7 @@ function RegisterForm() {
                     <button type="submit"
                             disabled={disabledButton}
                         className="btn bg-steel text-white">
-                        { loadingButton ? (<div className="spinner-border spinner-border-sm mr-2" role="status">
-                                        <span className="sr-only">Loading...</span>
-                                    </div>) : ''
+                        { loadingButton ? <ButtonSpinner/> : ''
                         }
                         Register
                     </button>
