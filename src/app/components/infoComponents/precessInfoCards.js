@@ -17,6 +17,9 @@ function ProcessInfoCard (props) {
             case 'FAILURE':
                 setClassType('alert alert-danger text-center')
                 break
+            
+            default:
+                return
         }
     })
 

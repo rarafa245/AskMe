@@ -1,5 +1,5 @@
 import React, { useState, useReducer, useEffect } from 'react'
-import QuestionCard from '../homeComponents/questionCard'
+import QuestionCard from '../infoComponents/questionCard'
 import axios from 'axios'
 
 const initialState = {

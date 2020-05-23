@@ -1,5 +1,5 @@
 import React, { useReducer, useEffect } from 'react'
-import QuestionCard from './questionCard'
+import QuestionCard from '../infoComponents/questionCard'
 import axios from 'axios'
 
 const initialState = {
@@ -34,6 +34,9 @@ const reducer = (state, action) => {
             })
         
         case 'FETCH_ERROR':
+            return
+
+        default:
             return
 
     }
