@@ -9,7 +9,7 @@ function UserQuestions (props) {
     useEffect(() => {
         localStorage.setItem('LPC', props.location.pathname)
         localStorage.setItem('AWTST', 'true')
-        loadPage()
+        loadPage(props)
     }, [])
 
     return (

@@ -4,7 +4,7 @@ import ProcessInfoCard from '../infoComponents/processInfoCards'
 import { ButtonSpinner } from '../infoComponents/loadSpinner'
 
 
-function QuestionsForm () {
+function QuestionsForm (props) {
 
     const [title, setTitle] = useState('')
     const [content, setContent] = useState('')
@@ -41,10 +41,10 @@ function QuestionsForm () {
             }
         })
         .catch(err => {
-                setMessage( <ProcessInfoCard type={'FAILURE'} 
-                                             message='An Error Has Occurred. Try Again !' />)
                 setLoadingButton(false)
                 setDisableButton(false)
+                alert('Session Expired! Timeout!')
+                props.history.push("/")
             })
     }
 

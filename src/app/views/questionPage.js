@@ -11,7 +11,7 @@ function QuestionPage (props) {
     useEffect(() => {
         localStorage.setItem('LPC', props.location.pathname)
         localStorage.setItem('AWTST', 'true')
-        loadPage()
+        loadPage(props)
     }, [])
 
     return(
@@ -28,7 +28,7 @@ function QuestionPage (props) {
                     </div>
 
                     <div className="row mt-2 col-md-6">
-                        <QuestionsForm />
+                        <QuestionsForm {...props}/>
                     </div>
 
                 </div>

@@ -36,9 +36,9 @@ const PrivateRoute = ({component: Component, ...rest}) => (
     />
 )
 
-function loadPage(){
+function loadPage(props) {
 
-    axios.get("http://localhost/refresh", {
+    axios.get("http://localhost:5000/refresh", {
         headers: {
             'Authorization': localStorage.getItem('AWT'),
             'UID': localStorage.getItem('UID')
@@ -49,8 +49,12 @@ function loadPage(){
         localStorage.setItem('AWT', res.data.token)
         }
     })
+    .catch(error => {
+        alert('Session Expired! Timeout!')
+        props.history.push("/")
+        
+    })
 }
-
 
 export {
     App,
