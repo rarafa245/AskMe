@@ -33,11 +33,13 @@ function QuestionsForm (props) {
                 setMessage( <ProcessInfoCard type={'SUCCESS'} message={res.data.message} /> )
                 setLoadingButton(false)
                 setDisableButton(false)
+                localStorage.setItem('AWT', res.data.token)
             }
             else {
                 setMessage( <ProcessInfoCard type={'FAILURE'} message={res.data.message} /> )
                 setLoadingButton(false)
                 setDisableButton(false)
+                localStorage.setItem('AWT', res.data.token)
             }
         })
         .catch(err => {
