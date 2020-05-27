@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react'
+import axios from 'axios'
 
 function UserCard(){
 
@@ -7,9 +8,22 @@ function UserCard(){
     useEffect(() => {
         fetch("http://localhost:5000/profilepic",{
             method: "GET",
+            headers: new Headers({
+                'Authorization': localStorage.getItem('AWT'),
+                'UID': localStorage.getItem('UID'),
+                'Cache-control': 'no-cache'
+            })
         })
         .then(res => res.blob())
-        .then(res => setPic( URL.createObjectURL(res) ) )
+        .then(res => {
+            const image = URL.createObjectURL(res)
+            setPic(image)
+        })
+
+        return () => {
+            URL.revokeObjectURL(pic)
+        }
+
     }, [])
 
     return(
