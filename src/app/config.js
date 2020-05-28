@@ -6,8 +6,9 @@ import Login from './views/loginPage'
 import Home from './views/homePage'
 import Register from './views/register'
 import QuestionPage from './views/questionPage'
-import LogOut from './views/logout'
+import SingleQuestionPage from './views/singleQuestionPage'
 import UserQuestions from './views/userQuestions'
+import LogOut from './views/logout'
 
 
 function App() {
@@ -17,10 +18,11 @@ function App() {
             <Switch>
                 <Route exact path={'/'} component={Login}/>
                 <Route exact path={'/register'} component={Register}/>
+                <Route exact path={'/:username/:id'} component={SingleQuestionPage}/>
                 <PrivateRoute exact path={'/home'} component={Home}/>
                 <PrivateRoute exact path={'/logout'} component={LogOut}/>
                 <PrivateRoute exact path={'/questions'} component={QuestionPage}/>
-                <PrivateRoute exact path={'/allquestions'} component={UserQuestions} />
+                <PrivateRoute exact path={'/allquestions'} component={UserQuestions}/>
             </Switch>
         </Router>
     )
