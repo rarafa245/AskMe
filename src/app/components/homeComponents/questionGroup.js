@@ -29,10 +29,18 @@ const reducer = (state, action) => {
             
             return ({
                 ...state,
-                payload: total_question,
+                payload: total_question
             })
 
         case false:
+
+            const message = (<h3 className="text-center m-4"><b>{action.data}</b></h3>)
+            return ({
+                ...state,
+                payload:message,
+            })
+            
+
         default:
             action.errorFunc(<ProcessInfoCard type={'FAILURE'} 
                                             message='An Error Has Occurred. Try Again !' />)
@@ -60,10 +68,11 @@ function QuestionGroup() {
         })
         .then(res => {
             setLoadingCards(false)
+            console.log(res.data.message)
             dispatch({
                 type: JSON.parse(res.data.status),
-                data: JSON.parse(res.data.message),
-                errorFunc: setErrorInfo
+                data: (res.data.status) ? JSON.parse(res.data.message)
+                                        : res.data.message,
             })
         })
         .catch(err => {
