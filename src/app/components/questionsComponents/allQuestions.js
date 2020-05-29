@@ -6,6 +6,7 @@ import { Spinner } from '../infoComponents/loadSpinner'
 
 const initialState = {
     loading: true,
+    navAvaliable: false,
     lastPage: '',
     payload: [],
     pages: []
@@ -44,12 +45,21 @@ const reducer = (state, action) => {
             return ({
                 ...state,
                 loading: false,
+                navAvaliable: true,
                 lastPage: allPages,
                 payload: total_question,
                 pages: receivedPages
             })
         
         case false:
+
+            const message = (<h3 className="text-center m-4"><b>{action.data}</b></h3>)
+                return ({
+                    ...state,
+                    loading: false,
+                    payload:message
+                })
+
         default:
             action.errorFunc(<ProcessInfoCard type={'FAILURE'} 
                                             message='An Error Has Occurred. Try Again !' />)
@@ -81,7 +91,8 @@ function AllQuestions() {
             dispatch({
                 func: setUrl,
                 type: JSON.parse(res.data.status),
-                data: JSON.parse(res.data.message)
+                data: (res.data.status) ? JSON.parse(res.data.message)
+                                        : res.data.message,
             })
         })
         .catch(err => {
@@ -112,7 +123,8 @@ function AllQuestions() {
                         {questions.payload}
                     </div>
 
-                    <nav className="mt-3">
+                {(questions.navAvaliable) ?
+                    (<nav className="mt-3">
                         <ul className="pagination">
                             <li className="page-item page-link" onClick={() => { changePage('PREVIOUS', setUrl, url, questions.lastPage) }}>
                                 Prev
@@ -123,6 +135,9 @@ function AllQuestions() {
                             </li>
                         </ul>
                     </nav>
+                    )
+                    :
+                    (<div className="mt-1"></div>) }
 
                 </div>
             ) 

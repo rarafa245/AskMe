@@ -6,7 +6,7 @@ import { Spinner } from '../infoComponents/loadSpinner'
 
 
 const initialState = {
-    payload: [],
+    payload: []
 }
 
 const reducer = (state, action) => {
@@ -68,7 +68,6 @@ function QuestionGroup() {
         })
         .then(res => {
             setLoadingCards(false)
-            console.log(res.data.message)
             dispatch({
                 type: JSON.parse(res.data.status),
                 data: (res.data.status) ? JSON.parse(res.data.message)
