@@ -36,8 +36,7 @@ const reducer = (state, action) => {
             for (let index in receivedData){
                 total_question.push(
                             <QuestionCard   key = {index}
-                                            introduction={index}
-                                            datePosted={receivedData[index].date_posted}
+                                            id={receivedData[index].id}
                                             title={receivedData[index].title}
                                             content={receivedData[index].content}/>)
             }
@@ -61,6 +60,7 @@ const reducer = (state, action) => {
                 })
 
         default:
+        
             action.errorFunc(<ProcessInfoCard type={'FAILURE'} 
                                             message='An Error Has Occurred. Try Again !' />)
             return ({
