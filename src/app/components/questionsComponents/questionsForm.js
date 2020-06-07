@@ -22,7 +22,7 @@ function QuestionsForm (props) {
 
         const questionData = new FormData(event.target)
 
-        axios.post('http://localhost:5000/regQuestion', questionData , {
+        axios.post('http://192.168.0.23:5000/regQuestion', questionData , {
             headers: {
                 'Authorization': localStorage.getItem('AWT'),
                 'UID': localStorage.getItem('UID')
@@ -34,6 +34,7 @@ function QuestionsForm (props) {
                 setLoadingButton(false)
                 setDisableButton(false)
                 localStorage.setItem('AWT', res.data.token)
+                window.location.reload()
             }
             else {
                 setMessage( <ProcessInfoCard type={'FAILURE'} message={res.data.message} /> )
@@ -50,7 +51,7 @@ function QuestionsForm (props) {
             })
     }
 
-    return(
+    return (
         <div className="col-12">
 
             <form onSubmit={handleSubmit}>

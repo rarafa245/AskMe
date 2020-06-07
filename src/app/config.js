@@ -6,7 +6,7 @@ import Login from './views/loginPage'
 import Home from './views/homePage'
 import Register from './views/register'
 import QuestionPage from './views/questionPage'
-import SingleQuestionPage from './views/singleQuestionPage'
+import QuestionAnswarePage from './views/questionAnswarePage'
 import UserQuestions from './views/userQuestions'
 import LogOut from './views/logout'
 
@@ -18,7 +18,7 @@ function App() {
             <Switch>
                 <Route exact path={'/'} component={Login}/>
                 <Route exact path={'/register'} component={Register}/>
-                <Route exact path={'/:username/:id'} component={SingleQuestionPage}/>
+                <Route exact path={'/:username/:id'} component={QuestionAnswarePage}/>
                 <PrivateRoute exact path={'/home'} component={Home}/>
                 <PrivateRoute exact path={'/logout'} component={LogOut}/>
                 <PrivateRoute exact path={'/questions'} component={QuestionPage}/>
@@ -40,7 +40,7 @@ const PrivateRoute = ({component: Component, ...rest}) => (
 
 function loadPage(props) {
 
-    axios.get("http://localhost:5000/refresh", {
+    axios.get("http://192.168.0.23:5000/refresh", {
         headers: {
             'Authorization': localStorage.getItem('AWT'),
             'UID': localStorage.getItem('UID')
@@ -52,6 +52,7 @@ function loadPage(props) {
         }
     })
     .catch(error => {
+        console.log(error)
         alert('Session Expired! Timeout!')
         props.history.push("/")
         

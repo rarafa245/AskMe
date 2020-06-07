@@ -1,8 +1,8 @@
 import React from 'react'
 import HomeNav from '../components/homeComponents/homeNav'
-import SingleQuestion from '../components/questionsComponents/singleQuestion'
+import QuestionTemplate from '../components/questionAnsware/questionTemplate'
 
-function SingleQuestionPage (props) {
+function QuestionAnswarePage (props) {
 
     return(
         <div>
@@ -13,7 +13,7 @@ function SingleQuestionPage (props) {
                 <div className="row justify-content-center p-0">
 
                     <div className="row mt-2 col-sm-10 col-md-8">
-                        <SingleQuestion {...props}/>
+                        <QuestionTemplate {...props}/>
                     </div>
 
                 </div>
@@ -22,4 +22,4 @@ function SingleQuestionPage (props) {
     )
 }
 
-export default SingleQuestionPage
+export default QuestionAnswarePage

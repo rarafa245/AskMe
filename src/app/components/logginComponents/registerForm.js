@@ -33,7 +33,7 @@ function RegisterForm() {
         }
 
         const registerData = new FormData(event.target)
-        axios.post('http://localhost:5000/register', registerData)
+        axios.post('http://192.168.0.23:5000/register', registerData)
             .then(res => {
                 if (res.data.status) {
                     setMessage( <ProcessInfoCard type={'SUCCESS'} message={res.data.message} />)

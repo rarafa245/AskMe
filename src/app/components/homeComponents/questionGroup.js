@@ -60,7 +60,7 @@ function QuestionGroup() {
 
     useEffect(() => {
 
-        axios.get(`http://localhost:5000/allquestions/5/1`, {
+        axios.get(`http://192.168.0.23:5000/allquestions/5/1`, {
             headers: {
                 'Authorization': localStorage.getItem('AWT'),
                 'UID': localStorage.getItem('UID')

@@ -2,6 +2,8 @@ import React, { useState, useReducer, useEffect } from 'react'
 import axios from 'axios'
 import ProcessInfoCard from '../infoComponents/processInfoCards'
 import { Spinner } from '../infoComponents/loadSpinner'
+import AnswareForm from './answareForm'
+import AnswareCard from './answareCard'
 
 
 const initialState = {
@@ -49,7 +51,7 @@ const reducer = (state, action) => {
 }
 
 
-function SingleQuestion (props) {
+function QuestionTemplate (props) {
 
     const question_id = props.match.params.id
     const question_author = props.match.params.username
@@ -57,7 +59,7 @@ function SingleQuestion (props) {
 
     useEffect(() => {
 
-        axios.get(`http://localhost:5000/question/${question_author}/${question_id}`)
+        axios.get(`http://192.168.0.23:5000/question/${question_author}/${question_id}`)
         .then(res => {
 
             dispatch ({
@@ -83,7 +85,7 @@ function SingleQuestion (props) {
     }, [])
 
 
-    return(
+    return (
 
         (question.loading) ? 
             ( <div className="card col-12 mt-2 p-4" >
@@ -93,20 +95,32 @@ function SingleQuestion (props) {
             </div>
             )
             :
-            ( <div className="card col-12 mt-2 p-4" >
-                <div className="border-bottom mb-3">
-                    <h1 className="title">{question.title}</h1>
-                    {
-                        (question.author) ? (<p className="text-center text-md-left m-1"><b>Author: </b>{question.author} | {question.data}</p>)
-                                            :   ''
-                    }
+            ( <div className="col-12 mt-2 mb-5">
+                <div className="card p-4" >
+                    <div className="border-bottom mb-3">
+                        <h1 className="title">{question.title}</h1>
+                        {
+                            (question.author) ? (<p className="text-center text-md-left m-1"><b>Author: </b>{question.author} | {question.data}</p>)
+                                                :   ''
+                        }
+                    </div>
+                    <div>
+                        {question.content}
+                    </div>
                 </div>
-                <div>
-                    {question.content}
+                <div className='mt-3'>
+                    <h1 className='m-2'>1 Answere</h1>
+                    
+                        <AnswareCard />
+                    
+                    
                 </div>
+                
+                <AnswareForm />
+
             </div>
             )
     )
 }
 
-export default SingleQuestion
+export default QuestionTemplate
