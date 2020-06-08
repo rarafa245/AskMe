@@ -116,28 +116,28 @@ function AllQuestions() {
             )
             :
             (
-                <div className="card mt-2 col-12">
+                <div className="card mt-1 mb-5 col-12">
                     <p className="m-2 opacity-3"><strong>All Your Questions - Page {url}</strong></p>
-                    <div className="card m-1 scroll-big">
+                    <div className="card m-1 scroll">
                         {errorInfo}
                         {questions.payload}
                     </div>
 
-                {(questions.navAvaliable) ?
-                    (<nav className="mt-3">
-                        <ul className="pagination">
-                            <li className="page-item page-link" onClick={() => { changePage('PREVIOUS', setUrl, url, questions.lastPage) }}>
-                                Prev
-                            </li>
-                                {questions.pages}
-                            <li className="page-item page-link" onClick={() => { changePage('NEXT', setUrl, url, questions.lastPage) }}>
-                                Next
-                            </li>
-                        </ul>
-                    </nav>
-                    )
-                    :
-                    (<div className="mt-1"></div>) }
+                    {(questions.navAvaliable) ?
+                        (<nav className="mt-3">
+                            <ul className="pagination">
+                                <li className="page-item page-link" onClick={() => { changePage('PREVIOUS', setUrl, url, questions.lastPage) }}>
+                                    Prev
+                                </li>
+                                    {questions.pages}
+                                <li className="page-item page-link" onClick={() => { changePage('NEXT', setUrl, url, questions.lastPage) }}>
+                                    Next
+                                </li>
+                            </ul>
+                        </nav>
+                        )
+                        :
+                        (<div className="mt-1"></div>) }
 
                 </div>
             ) 
