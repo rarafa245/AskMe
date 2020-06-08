@@ -3,10 +3,8 @@ import axios from 'axios'
 import ProcessInfoCard from '../infoComponents/processInfoCards'
 import { ButtonSpinner } from '../infoComponents/loadSpinner'
 
+function AnswarForm (props) {
 
-function QuestionsForm (props) {
-
-    const [title, setTitle] = useState('')
     const [content, setContent] = useState('')
     const [message, setMessage] = useState('')
     const [disabledButton, setDisableButton] = useState(false)
@@ -20,9 +18,11 @@ function QuestionsForm (props) {
         setMessage( <ProcessInfoCard type={'LOADING'} message={'Wait a moment...'} />)
         setDisableButton(true)
 
-        const questionData = new FormData(event.target)
+        const answerInfos = new FormData(event.target)
+        answerInfos.append('username', localStorage.getItem('UID'))
+        answerInfos.append('id_question', props.id_question)
 
-        axios.post('http://192.168.0.23:5000/regQuestion', questionData , {
+        axios.post('http://192.168.0.23:5000/postAnswer', answerInfos, {
             headers: {
                 'Authorization': localStorage.getItem('AWT'),
                 'UID': localStorage.getItem('UID')
@@ -33,43 +33,34 @@ function QuestionsForm (props) {
                 setMessage( <ProcessInfoCard type={'SUCCESS'} message={res.data.message} /> )
                 setLoadingButton(false)
                 setDisableButton(false)
-                localStorage.setItem('AWT', res.data.token)
                 window.location.reload()
             }
             else {
                 setMessage( <ProcessInfoCard type={'FAILURE'} message={res.data.message} /> )
                 setLoadingButton(false)
                 setDisableButton(false)
-                localStorage.setItem('AWT', res.data.token)
             }
         })
         .catch(err => {
                 setLoadingButton(false)
                 setDisableButton(false)
-                alert('Session Expired! Timeout!')
-                props.history.push("/")
+                console.log(err)
         })
+        
     }
 
     return (
-        <div className="col-12">
-
+        <div className="mt-3">
             <form onSubmit={handleSubmit}>
-                <fieldset className="form-group">
-                    <legend className="border-bottom text-center text-md-left mb-4">New Question?</legend>
-
+                <fieldset>
+                <legend className="border-bottom text-center text-md-left mb-2">
+                    Send An Answer
+                </legend>
+                    
                     {message}
 
                     <div className="form-group">
-                        <label htmlFor="Title"><h6>Question Title</h6></label>
-                        <input id="Title"
-                                name="title"
-                                value={title}
-                                onChange={ e => setTitle(e.target.value) }
-                                type="text" 
-                                className="form-control mb-2" />
-                        
-                        <label htmlFor="Content"><h6>Whats Your Question?</h6></label>
+                        <label htmlFor="Content"><h6>New Answer</h6></label>
                         <textarea id="Content"
                                 name="content"
                                 rows="5" 
@@ -78,20 +69,20 @@ function QuestionsForm (props) {
                                 onChange={ e => setContent(e.target.value) }
                                 className="form-control" />
                     </div>
-
+                    
                     <button type="submit" 
                             disabled={disabledButton}
                             className="btn bg-steel text-white">
-                        { loadingButton ? <ButtonSpinner/> : ''}
+                            { loadingButton ? <ButtonSpinner/> : ''}
                         Submit
                     </button>
 
                 </fieldset>
             </form>
-            
         </div>
+        
     )
-    
+
 }
 
-export default QuestionsForm
+export default AnswarForm
