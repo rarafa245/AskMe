@@ -1,8 +1,6 @@
 import React, { useReducer, useEffect, useState } from 'react'
-import { QuestionCard, AlertCard, Spinner } from '../../../Components'
-import { axiosGetQuestions } from '../../../Services'
-import { useSelector, useDispatch } from 'react-redux'
-import { totalPages } from '../redux'
+import { QuestionCard, AlertCard } from '../../../../Components'
+import { useSelector } from 'react-redux'
 
 
 const initialState = {
@@ -41,8 +39,9 @@ const reducer = (state, action) => {
             
 
         default:
+
             action.errorFunc(<AlertCard type={'FAILURE'} 
-                                            message='An Error Has Occurred. Try Again !' />)
+                                        message='An Error Has Occurred. Try Again !' />)
             return ({
                 ...state,
             })
@@ -54,40 +53,27 @@ const reducer = (state, action) => {
 function AllQuestionsGroup(props) {
 
     const [questions, setQuestions] = useReducer(reducer, initialState)
-    const [loadingCards, setLoadingCards] = useState(true)
     const [errorInfo, setErrorInfo] = useState()
 
     const numOfPages = useSelector( state => state.numOfPages )
-    const actualPage = useSelector( state => state.actualPage)
-    const dispatch = useDispatch()
+    const actualPage = useSelector( state => state.actualPage )
     
 
     useEffect(() => {
-        axiosGetQuestions(props.numberOfQuestions, actualPage)
-            .then(response => {
-                    const questionsInfo = {
-                                            type: response.status,
-                                            data: response.data,
-                                            errorFunc: setErrorInfo
-                                        }
-                                                             
-                    setQuestions(questionsInfo)
-                    setLoadingCards(false)
-                    dispatch(
-                        totalPages(response.pages)
-                    )
-            })
+
+        setQuestions({ 
+            type: props.type,
+            data: props.data,
+            errorFunc: setErrorInfo
+        })   
         
-    }, [actualPage])
+    }, [props.data])
     
     return (
         <div className='col-12 p-0 m-0'>
             <h3>Total Questions - Page {actualPage}/{numOfPages}</h3>
             <div className={'card scroll'}>
                 <div>
-                    <div className="d-flex justify-content-center">
-                        <Spinner state={loadingCards} />
-                    </div>
                     {errorInfo}
                     {questions.formatedQuestions}
                 </div>

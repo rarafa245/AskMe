@@ -11,7 +11,6 @@ async function axiosRefreshToken(props) {
         .then(res => { 
             if (res.data.status)
                 localStorage.setItem('AWT', res.data.token)
-            console.log('oi')
         })
         .catch(error => {
             alert('Session Expired! Timeout!')

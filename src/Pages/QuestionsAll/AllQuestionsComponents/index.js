@@ -1,0 +1,2 @@
+import AllQuestionsComponents from './AllQuestionsComponents'
+export default AllQuestionsComponents

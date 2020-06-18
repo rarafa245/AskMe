@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
-import { changePage, prevPage, nextPage } from '../redux'
+import { changePage, prevPage, nextPage } from '../../redux'
 
 function AllQuestionsPagination() {
 
