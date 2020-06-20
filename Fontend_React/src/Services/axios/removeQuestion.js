@@ -9,7 +9,7 @@ const axiosRemoveQuestion = (questionID) => {
         const questionInfo = new FormData()
         questionInfo.append('id_question', questionID)
 
-        axios.delete('http://192.168.0.23:5000/deleteQuestion', { 
+        axios.delete('http://localhost:5000/deleteQuestion', { 
             headers: {
                 'Authorization': localStorage.getItem('AWT'),
                 'UID': localStorage.getItem('UID')

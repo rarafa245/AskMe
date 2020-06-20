@@ -2,7 +2,7 @@ import axios from 'axios'
 
 async function axiosGetQuestionSimple(username, id_question) {
 
-   const response = await axios.get(`http://192.168.0.23:5000/questionSimple/${username}/${id_question}`, {
+   const response = await axios.get(`http://localhost:5000/questionSimple/${username}/${id_question}`, {
                         headers: {
                             'Authorization': localStorage.getItem('AWT'),
                             'UID': localStorage.getItem('UID')

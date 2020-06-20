@@ -2,7 +2,7 @@ import axios from 'axios'
 
 async function axiosPostQuestions(questionCreateInfos) {
 
-   const response = await axios.post('http://192.168.0.23:5000/regQuestion', questionCreateInfos , {
+   const response = await axios.post('http://localhost:5000/regQuestion', questionCreateInfos , {
                         headers: {
                             'Authorization': localStorage.getItem('AWT'),
                             'UID': localStorage.getItem('UID')

@@ -2,7 +2,7 @@ import axios from 'axios'
 
 async function axiosEditQuestion (questionInfo) {
 
-    const response = await axios.patch('http://192.168.0.23:5000/updateQuestion', questionInfo, {
+    const response = await axios.patch('http://localhost:5000/updateQuestion', questionInfo, {
                         headers: {
                             'Authorization': localStorage.getItem('AWT'),
                             'UID': localStorage.getItem('UID')

@@ -2,7 +2,7 @@ import axios from 'axios'
 
 async function axiosRefreshToken(props) {
 
-   const response = await axios.get("http://192.168.0.23:5000/refresh", {
+   const response = await axios.get("http://localhost:5000/refresh", {
                         headers: {
                             'Authorization': localStorage.getItem('AWT'),
                             'UID': localStorage.getItem('UID')

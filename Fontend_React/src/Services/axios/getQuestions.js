@@ -2,7 +2,7 @@ import axios from 'axios'
 
 async function axiosGetQuestions (numberOfQuestions, pagination){
 
-   const response = await axios.get(`http://192.168.0.23:5000/allquestions/${numberOfQuestions}/${pagination}`, {
+   const response = await axios.get(`http://localhost:5000/allquestions/${numberOfQuestions}/${pagination}`, {
                         headers: {
                             'Authorization': localStorage.getItem('AWT'),
                             'UID': localStorage.getItem('UID')

@@ -1,6 +1,6 @@
 async function axiosUserPicture (){
 
-    const response = await fetch("http://192.168.0.23:5000/profilepic",{
+    const response = await fetch("http://localhost:5000/profilepic",{
                                 method: "GET",
                                 headers: new Headers({
                                     'Authorization': localStorage.getItem('AWT'),

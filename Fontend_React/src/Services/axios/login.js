@@ -2,7 +2,7 @@ import axios from 'axios'
 
 async function axiosLogin (body){
 
-   const response = await axios.post('http://192.168.0.23:5000/login', body)
+   const response = await axios.post('http://localhost:5000/login', body)
         .then(res => {
             if (res.data.status) {
                 return {

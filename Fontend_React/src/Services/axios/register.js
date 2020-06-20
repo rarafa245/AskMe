@@ -2,7 +2,7 @@ import axios from 'axios'
 
 async function axiosRegister (body){
 
-   const response = await axios.post('http://192.168.0.23:5000/register', body)
+   const response = await axios.post('http://localhost:5000/register', body)
         .then(res => {
             return {
                 status: res.data.status,

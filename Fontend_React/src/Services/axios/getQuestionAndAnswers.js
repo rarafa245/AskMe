@@ -2,7 +2,7 @@ import axios from 'axios'
 
 async function getQuestionAndAnswers (questionAuthor, questionId){
 
-   const response = await axios.get(`http://192.168.0.23:5000/question/${questionAuthor}/${questionId}`)
+   const response = await axios.get(`http://localhost:5000/question/${questionAuthor}/${questionId}`)
         .then(res => {
             return {
                 status: res.data.status,

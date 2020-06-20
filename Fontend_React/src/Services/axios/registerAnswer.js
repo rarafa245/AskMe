@@ -2,7 +2,7 @@ import axios from 'axios'
 
 async function axiosRegisterAnswer (body) {
 
-   const response = await axios.post('http://192.168.0.23:5000/postAnswer', body, {
+   const response = await axios.post('http://localhost:5000/postAnswer', body, {
                         headers: {
                             'Authorization': localStorage.getItem('AWT'),
                             'UID': localStorage.getItem('UID')
