@@ -46,8 +46,12 @@ const QuestionContent = (props) => {
                     <UncontrolledDropdown setActiveFromChild>
                         <DropdownToggle tag="a" className="nav-link" caret></DropdownToggle>
                         <DropdownMenu>
-                            <DropdownItem >Edit</DropdownItem>
-                            <DropdownItem onClick={() => axiosRemoveQuestion(props.questionID)}>Delete</DropdownItem>
+                            <Link to={`/editQuestion/${props.current_user}/${props.questionID}`}>
+                                <DropdownItem>Edit</DropdownItem>
+                            </Link>
+                            <Link to={'#'}>
+                                <DropdownItem onClick={() => axiosRemoveQuestion(props.questionID)}>Delete</DropdownItem>
+                            </Link>
                         </DropdownMenu>
                     </UncontrolledDropdown>
                 </div>

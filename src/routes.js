@@ -6,6 +6,7 @@ import { LoginPage,
          QuestionGeneral,
          QuestionsAll,
          SingleQuestion,
+         EditQuestion,
          LogoutPage } from './Pages'
 
 function App() {
@@ -16,6 +17,7 @@ function App() {
                 <Route exact path={'/'} component={LoginPage}/>
                 <Route exact path={'/register'} component={RegisterPage}/>
                 <Route exact path={'/:username/:id'} component={SingleQuestion}/>
+                <PrivateRoute exact path={'/editQuestion/:username/:id'} component={EditQuestion} />
                 <PrivateRoute exact path={'/home'} component={HomePage}/>
                 <PrivateRoute exact path={'/logout'} component={LogoutPage}/>
                 <PrivateRoute exact path={'/questions'} component={QuestionGeneral}/>

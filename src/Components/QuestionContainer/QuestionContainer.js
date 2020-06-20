@@ -59,7 +59,6 @@ function QuestionContainer(props) {
 
     useEffect(() => {
         
-
         axiosGetQuestions(props.numberOfQuestions, props.pagination)
             .then(response => {
                     const questionsInfo = {
