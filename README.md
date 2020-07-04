@@ -25,13 +25,13 @@ Basic Technologies
 
 
 <p align="center">
-    <img width="450" height="320" src="https://github.com/rarafa245/AskMe/blob/master/imgs/img1.png">
-    <img width="450" height="320" src="https://github.com/rarafa245/AskMe/blob/master/imgs/img2.png">
+    <img width="550" height="320" src="https://github.com/rarafa245/AskMe/blob/master/imgs/img1.png">
+    <img width="550" height="320" src="https://github.com/rarafa245/AskMe/blob/master/imgs/img2.png">
 </p>
  
 <p align="center">
-  <img width="450" height="320" src="https://github.com/rarafa245/AskMe/blob/master/imgs/img3.png">
-  <img width="450" height="320" src="https://github.com/rarafa245/AskMe/blob/master/imgs/img4.png">
+  <img width="550" height="320" src="https://github.com/rarafa245/AskMe/blob/master/imgs/img3.png">
+  <img width="550" height="320" src="https://github.com/rarafa245/AskMe/blob/master/imgs/img4.png">
 </p>
 
 <p align="center">
