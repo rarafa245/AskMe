@@ -25,7 +25,6 @@ Basic Technologies
 
 
 <p align="center">
-    <img width="650" height="320" src="https://github.com/rarafa245/AskMe/blob/master/imgs/img1.png">
     <img width="650" height="320" src="https://github.com/rarafa245/AskMe/blob/master/imgs/img2.png">
 </p>
  
